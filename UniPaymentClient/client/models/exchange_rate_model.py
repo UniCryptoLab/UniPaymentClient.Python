@@ -13,13 +13,13 @@ class ExchangeRateModel(object):
     }
 
     attribute_map = {
-        'from': 'from_str',
+        'from_str': 'from',
         'to': 'to',
         'rate': 'rate'
     }
 
     def __init__(self, from_str=None, to=None, rate=None):  # noqa: E501
-        self._from = None
+        self._from_str = None
         self._to = None
         self._rate = None
         self.discriminator = None
@@ -56,9 +56,12 @@ class ExchangeRateModel(object):
 
     def to_dict(self):
         result = {}
-
         for attr, _ in six.iteritems(self.field_types):
-            value = getattr(self, attr)
+            if attr == 'from':
+                value = getattr(self, 'from_str')
+            else:
+                value = getattr(self, attr)
+
             if isinstance(value, list):
                 result[attr] = list(map(
                     lambda x: x.to_dict() if hasattr(x, "to_dict") else x,

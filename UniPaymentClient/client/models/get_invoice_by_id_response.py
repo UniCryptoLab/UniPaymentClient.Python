@@ -9,7 +9,7 @@ class GetInvoiceByIdResponse(object):
     field_types = {
         'code': 'str',
         'msg': 'str',
-        'data': 'TransactionListModel'
+        'data': 'InvoiceDetailModel'
     }
 
     attribute_map = {

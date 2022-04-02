@@ -5,7 +5,7 @@ import pprint
 import six
 
 
-class TransactionListModel(object):
+class InvoiceDetailModel(object):
     field_types = {
         'transactions': 'list[InvoiceTransactionModel]',
         'network': 'str',
@@ -272,7 +272,7 @@ class TransactionListModel(object):
                 ))
             else:
                 result[attr] = value
-        if issubclass(TransactionListModel, dict):
+        if issubclass(InvoiceDetailModel, dict):
             for key, value in self.items():
                 result[key] = value
 
@@ -285,7 +285,7 @@ class TransactionListModel(object):
         return self.to_str()
 
     def __eq__(self, other):
-        if not isinstance(other, TransactionListModel):
+        if not isinstance(other, InvoiceDetailModel):
             return False
 
         return self.__dict__ == other.__dict__

@@ -9,7 +9,7 @@ from UniPaymentClient.client.models.query_invoice_request import QueryInvoiceReq
 from UniPaymentClient.client.models.invoice_page_list_model import InvoicePageListModel
 from UniPaymentClient.client.models.create_invoice_response import CreateInvoiceResponse
 from UniPaymentClient.client.models.query_invoice_response import QueryInvoiceResponse
-from UniPaymentClient.client.models.transaction_list_model import TransactionListModel
+from UniPaymentClient.client.models.invoice_detail_model import InvoiceDetailModel
 from UniPaymentClient.client.models.invoice_transaction_model import InvoiceTransactionModel
 from UniPaymentClient.client.models.get_invoice_by_id_response import GetInvoiceByIdResponse
 from UniPaymentClient.client.models.exchange_rate_model import ExchangeRateModel

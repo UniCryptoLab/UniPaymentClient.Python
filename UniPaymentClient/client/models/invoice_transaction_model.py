@@ -21,7 +21,7 @@ class InvoiceTransactionModel(object):
         'hash': 'hash',
         'network': 'network',
         'symbol': 'symbol',
-        'from': 'from_str',
+        'from_str': 'from',
         'to': 'to',
         'amount': 'amount',
         'confirmation_count': 'confirmation_count',
@@ -33,7 +33,7 @@ class InvoiceTransactionModel(object):
         self._hash = None
         self._network = None
         self._symbol = None
-        self._from = None
+        self._from_str = None
         self._to = None
         self._amount = None
         self._confirmation_count = None
@@ -124,7 +124,11 @@ class InvoiceTransactionModel(object):
         result = {}
 
         for attr, _ in six.iteritems(self.field_types):
-            value = getattr(self, attr)
+            if attr == 'from':
+                value = getattr(self, 'from_str')
+            else:
+                value = getattr(self, attr)
+
             if isinstance(value, list):
                 result[attr] = list(map(
                     lambda x: x.to_dict() if hasattr(x, "to_dict") else x,

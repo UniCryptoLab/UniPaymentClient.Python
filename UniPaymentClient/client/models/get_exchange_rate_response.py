@@ -74,7 +74,7 @@ class GetExchangeRateResponse(object):
                 ))
             else:
                 result[attr] = value
-        if issubclass(GetExchangeRatesResponse, dict):
+        if issubclass(GetExchangeRateResponse, dict):
             for key, value in self.items():
                 result[key] = value
 
@@ -87,7 +87,7 @@ class GetExchangeRateResponse(object):
         return self.to_str()
 
     def __eq__(self, other):
-        if not isinstance(other, GetExchangeRatesResponse):
+        if not isinstance(other, GetExchangeRateResponse):
             return False
 
         return self.__dict__ == other.__dict__

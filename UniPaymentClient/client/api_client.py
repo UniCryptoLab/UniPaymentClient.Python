@@ -7,16 +7,17 @@ import hmac
 import json
 import mimetypes
 import os
+import platform
 import re
 import tempfile
 import urllib
+import urllib.parse
+import urllib.request
 import uuid
-from base64 import b64encode, urlsafe_b64encode
+from base64 import b64encode
 from hashlib import md5
 from multiprocessing.pool import ThreadPool
 from time import time
-import urllib.request
-import urllib.parse
 
 import six
 from six.moves.urllib.parse import quote
@@ -55,7 +56,7 @@ class ApiClient(object):
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'UniPaymentClient/1.0.0/python'
+        self.user_agent = 'unipayment_sdk_python/1.0.0.0 (' + platform.system() + ' ' + platform.release() + ')'
 
     def __del__(self):
         self.pool.close()
@@ -568,6 +569,8 @@ class ApiClient(object):
         kwargs = {}
         if klass.field_types is not None:
             for attr, attr_type in six.iteritems(klass.field_types):
+                if attr == 'from':
+                    attr = 'from_str'
                 if (data is not None and
                         klass.attribute_map[attr] in data and
                         isinstance(data, (list, dict))):
