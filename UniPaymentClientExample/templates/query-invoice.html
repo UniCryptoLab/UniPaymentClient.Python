@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UniPayment Client Example | {{title}}</title>
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'lib/bootstrap/dist/css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename= 'lib/datatables/datatables.min.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/site.css') }}"/>
+
+    <!-- Favicon -->
+    <link href="{{ url_for('static', filename= 'favicon.ico') }}" type="image/x-icon"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn"t work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" href="/">UniPayment Example</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="https://www.unipayment.io" target="_blank">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="create-invoice">Create</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="query-invoice">Query</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="https://unipayment.readme.io" target="_blank">APIDoc</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <main role="main" class="pb-3">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="text-center">
+                    <h2>Invoice Query Form </h2>
+                </div>
+                <p>&nbsp;</p>
+                {% if errorCode %}
+                <div class="alert alert-danger" role="alert">
+                    Code:{{errorCode}} Error: {{errorMessage}}
+                </div>
+                {% endif %}
+                <form method="post" id="queryInvoiceForm">
+                    <div class="row mb-3">
+                        <label for="apiHost" class="col-sm-2 col-form-label">Api Host</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="apiHost" placeholder="API Host" name="apiHost"
+                                   value="{{apiHost}}" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="appId" class="col-sm-2 col-form-label">App ID</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="appId" placeholder="APP ID" name="appId"
+                                   value="{{appId}}" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="apiKey" class="col-sm-2 col-form-label">Api Key</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="apiKey" placeholder="API Key" name="apiKey"
+                                   value="{{apiKey}}" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="invoiceId" class="col-sm-2 col-form-label">Invoice ID</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="invoiceId" placeholder="Invoice ID"
+                                   name="invoiceId">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="orderId" class="col-sm-2 col-form-label">Order ID</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="orderId" placeholder="Order ID" name="orderId">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="status" class="col-sm-2 col-form-label">Status</label>
+                        <div class="col-lg-10">
+                            <select class="custom-select" name="status" id="status">
+                                <option value="">None</option>
+                                <option value="new">New</option>
+                                <option value="paid">Paid</option>
+                                <option value="confirmed">Confirmed</option>
+                                <option value="completed">Complete</option>
+                                <option value="expired">Expired</option>
+                                <option value="invalid">Invalid</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="start" class="col-sm-2 col-form-label">Start Date / Time</label>
+                        <div class="col-lg-10">
+                            <input class="form-control" name="start" id="start" type="datetime-local"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="end" class="col-sm-2 col-form-label">End Date / Time</label>
+                        <div class="col-lg-10">
+                            <input class="form-control" name="end" id="end" type="datetime-local"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="isAsc" class="col-sm-2 col-form-label">Is Ascending</label>
+                        <div class="col-lg-10">
+                            <select class="custom-select" name="isAsc" id="isAsc">
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row text-right">
+                        <div class="col-sm-10 offset-sm-2">
+                            <button type="submit" class="btn btn-primary">Query Invoice</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-sm table-condensed table-striped table-hover" id="query-result-table"
+                   style="font-size: 14px">
+                <thead>
+                <tr>
+                    <th scope="col">Invoice Id</th>
+                    <th scope="col">Order Id</th>
+                    <th scope="col">Price Amount</th>
+                    <th scope="col">Price Currency</th>
+                    <th scope="col">Pay Amount</th>
+                    <th scope="col">Pay Currency</th>
+                    <th scope="col">Paid Amount</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Invoice Url</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer class="border-top footer text-muted">
+    <div class="container text-center">
+        &copy; 2022 - UniPayment.Client.Example - <a href="/privacy">Privacy</a>
+    </div>
+</footer>
+
+<footer>
+    <script src="{{ url_for('static', filename= 'lib/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'lib/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'lib/datatables/datatables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'js/site.js') }}"></script>
+</footer>
+</body>
+</html>
