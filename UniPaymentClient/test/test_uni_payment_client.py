@@ -13,11 +13,9 @@ from unipayment import CreateInvoiceRequest, QueryInvoiceRequest
 class TestUniPaymentClient(unittest.TestCase):
 
     def setUp(self):
-        configuration = Configuration()
-        configuration.app_id = 'cee1b9e2-d90c-4b63-9824-d621edb38012'
-        configuration.api_key = '9G62Fd7fCQGyznVvatk4SAfGsHDEt819E'
-        configuration.host = 'https://sandbox-api.unipayment.io'
-        self.client = UniPaymentClient(ApiClient(configuration))
+        app_id = 'cee1b9e2-d90c-4b63-9824-d621edb38012'
+        api_key = '9G62Fd7fCQGyznVvatk4SAfGsHDEt819E'
+        self.client = UniPaymentClient(app_id, api_key, True, True)
 
     def tearDown(self):
         pass

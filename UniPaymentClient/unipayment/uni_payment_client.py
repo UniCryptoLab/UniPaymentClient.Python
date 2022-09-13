@@ -8,18 +8,22 @@ from datetime import datetime
 import six
 
 from .api_client import ApiClient
-
+from .configuration import Configuration
 
 # python 2 and python 3 compatibility library
 
 
 class UniPaymentClient(object):
-    def __init__(self, api_client=None):
-        if api_client is None:
-            api_client = ApiClient()
-        self.api_client = api_client
-
-        self.configuration = api_client.configuration
+    def __init__(self, app_id, api_key, is_sandbox=False, debug=False):
+        self.configuration = Configuration()
+        self.configuration.app_id = app_id
+        self.configuration.api_key = api_key
+        self.configuration.debug = debug
+        if is_sandbox:
+            self.configuration.host = "https://sandbox-api.unipayment.io"
+        else:
+            self.configuration.host = "https://api.unipayment.io"
+        self.api_client = ApiClient(self.configuration)
 
     def create_invoice(self, create_invoice_request, **kwargs):
         """create_invoice
