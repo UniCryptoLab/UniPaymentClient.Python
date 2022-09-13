@@ -10,7 +10,7 @@ from UniPaymentClient.client.rest import ApiException
 app = Flask(__name__)
 app.config['appId'] = 'cee1b9e2-d90c-4b63-9824-d621edb38012'
 app.config['apiKey'] = '9G62Fd7fCQGyznVvatk4SAfGsHDEt819E'
-app.config['apiHost'] = 'https://sandbox.unipayment.io'
+app.config['apiHost'] = 'https://sandbox-api.unipayment.io'
 app.config['secret_key'] = uuid.uuid4().hex
 
 
@@ -122,6 +122,20 @@ def post_query_invoice():
 def privacy():
     return render_template('privacy.html', title='Privacy Policy')
 
+@app.route("/check-notify", methods=['POST'])
+def check_notify():
+    notify = request.get_json()
+    configuration = Configuration()
+    configuration.app_id = app.config['appId']
+    configuration.api_key = app.config['apiKey']
+    configuration.host = app.config['apiHost']
+    uni_payment_client = client.UniPaymentClient(ApiClient(configuration))
+    try:
+        check_ipn_response = uni_payment_client.check_ipn(notify)
+        return jsonify(check_ipn_response.to_dict())
+    except ApiException as e:
+        error_response = json.loads(e.body)
+        return jsonify(error_response)
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8080, debug=True)

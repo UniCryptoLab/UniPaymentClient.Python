@@ -18,3 +18,4 @@ from UniPaymentClient.client.models.get_exchange_rate_response import GetExchang
 from UniPaymentClient.client.models.query_ips_response import QueryIpsResponse
 from UniPaymentClient.client.models.currency_model import CurrencyModel
 from UniPaymentClient.client.models.get_currencies_response import GetCurrenciesResponse
+from UniPaymentClient.client.models.check_ipn_response import CheckIpnResponse

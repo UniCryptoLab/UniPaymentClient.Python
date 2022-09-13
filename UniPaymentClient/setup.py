@@ -2,7 +2,7 @@
 
 from setuptools import setup, find_packages  # noqa: H301
 
-NAME = "unipayment-client"
+NAME = "unipayment_client"
 VERSION = "1.0.0.0"
 # To install the library, run the following
 #
@@ -16,7 +16,9 @@ REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil"]
 setup(
     name=NAME,
     version=VERSION,
-    description="Uni Payment Client",
+    description="UniPayment Client",
+    auther="UniPayment.io",
+    auther_email="develop@unipayment.io",
     install_requires=REQUIRES,
     packages=find_packages(),
     include_package_data=True,

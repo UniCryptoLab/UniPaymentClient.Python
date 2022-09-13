@@ -28,7 +28,7 @@ from UniPaymentClient.client.configuration import Configuration
 
 
 # python 2 and python 3 compatibility library
-
+SDK_VERSION = '1.0.0.0'
 
 class ApiClient(object):
     PRIMITIVE_TYPES = (float, bool, bytes, six.text_type) + six.integer_types
@@ -56,7 +56,7 @@ class ApiClient(object):
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'unipayment_sdk_python/1.0.0.0 (' + platform.system() + ' ' + platform.release() + ')'
+        self.user_agent = 'unipayment_sdk_python/' + SDK_VERSION + ' (' + platform.system() + ' ' + platform.release() + ')'
 
     def __del__(self):
         self.pool.close()

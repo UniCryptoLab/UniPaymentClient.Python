@@ -101,7 +101,7 @@ class UniPaymentClient(object):
         auth_settings = []
 
         return self.api_client.call_api(
-            '/api/v' + self.configuration.api_version + '/invoices', 'POST',
+            '/v' + self.configuration.api_version + '/invoices', 'POST',
             path_params,
             query_params,
             header_params,
@@ -199,7 +199,7 @@ class UniPaymentClient(object):
         auth_settings = []
 
         return self.api_client.call_api(
-            '/api/v' + self.configuration.api_version + '/invoices', 'GET',
+            '/v' + self.configuration.api_version + '/invoices', 'GET',
             path_params,
             query_params,
             header_params,
@@ -290,7 +290,7 @@ class UniPaymentClient(object):
         auth_settings = []
 
         return self.api_client.call_api(
-            '/api/v' + self.configuration.api_version + '/invoices/' + invoice_id, 'GET',
+            '/v' + self.configuration.api_version + '/invoices/' + invoice_id, 'GET',
             path_params,
             query_params,
             header_params,
@@ -381,7 +381,7 @@ class UniPaymentClient(object):
         auth_settings = []
 
         return self.api_client.call_api(
-            '/api/v' + self.configuration.api_version + '/rates/' + fiat_currency, 'GET',
+            '/v' + self.configuration.api_version + '/rates/' + fiat_currency, 'GET',
             path_params,
             query_params,
             header_params,
@@ -478,7 +478,7 @@ class UniPaymentClient(object):
         auth_settings = []
 
         return self.api_client.call_api(
-            '/api/v' + self.configuration.api_version + '/rates/' + fiat_currency + '/' + crypto_currency, 'GET',
+            '/v' + self.configuration.api_version + '/rates/' + fiat_currency + '/' + crypto_currency, 'GET',
             path_params,
             query_params,
             header_params,
@@ -563,7 +563,7 @@ class UniPaymentClient(object):
         auth_settings = []
 
         return self.api_client.call_api(
-            '/api/v' + self.configuration.api_version + '/ips', 'GET',
+            '/v' + self.configuration.api_version + '/ips', 'GET',
             path_params,
             query_params,
             header_params,
@@ -648,7 +648,7 @@ class UniPaymentClient(object):
         auth_settings = []
 
         return self.api_client.call_api(
-            '/api/v' + self.configuration.api_version + '/currencies', 'GET',
+            '/v' + self.configuration.api_version + '/currencies', 'GET',
             path_params,
             query_params,
             header_params,
@@ -656,6 +656,102 @@ class UniPaymentClient(object):
             post_params=form_params,
             files=local_var_files,
             response_type='GetCurrenciesResponse',
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def check_ipn(self, ipn_notify, **kwargs):
+        """check_ipn
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.check_ipn(ipn_notify, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param json or string ipn_notify: (required)
+        :return: CheckIpnResponse
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.check_ipn_with_http_info(ipn_notify, **kwargs)
+        else:
+            (data) = self.check_ipn_with_http_info(ipn_notify, **kwargs)
+            return data
+
+    def check_ipn_with_http_info(self, ipn_notify, **kwargs):
+        """check_ipn
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.check_ipn_with_http_info(ipn_notify, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param json or string ipn_notify: (required)
+        :return: CheckIpnResponse
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['ipn_notify']
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method check_ipn" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'create_invoice_request' is set
+        if ('ipn_notify' not in params or
+                params['ipn_notify'] is None):
+            raise ValueError(
+                "Missing the required parameter `ipn_notify` when calling `check_ipn`")
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = None
+
+        body_params = None
+        if 'ipn_notify' in params:
+            # ipn_notify is json or json string, it is not request object
+            body_params = params['ipn_notify']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['*/*'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(
+            '/v' + self.configuration.api_version + '/ipn', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='CheckIpnResponse',
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
