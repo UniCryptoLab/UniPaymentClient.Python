@@ -5,10 +5,9 @@ from __future__ import absolute_import
 import unittest
 import uuid
 
-import UniPaymentClient.client
-from UniPaymentClient.client import CreateInvoiceRequest, Configuration, ApiClient
-from UniPaymentClient.client.models.query_invoice_request import QueryInvoiceRequest
-from UniPaymentClient.client.uni_payment_client import UniPaymentClient
+import unipayment
+from unipayment import Configuration, ApiClient, UniPaymentClient
+from unipayment import CreateInvoiceRequest, QueryInvoiceRequest
 
 
 class TestUniPaymentClient(unittest.TestCase):
@@ -17,7 +16,7 @@ class TestUniPaymentClient(unittest.TestCase):
         configuration = Configuration()
         configuration.app_id = 'cee1b9e2-d90c-4b63-9824-d621edb38012'
         configuration.api_key = '9G62Fd7fCQGyznVvatk4SAfGsHDEt819E'
-        configuration.host = 'https://sandbox.unipayment.io'
+        configuration.host = 'https://sandbox-api.unipayment.io'
         self.client = UniPaymentClient(ApiClient(configuration))
 
     def tearDown(self):

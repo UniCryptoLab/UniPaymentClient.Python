@@ -62,9 +62,9 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
         self.verify_ssl = True
         # Set this to customize the certificate file to verify the peer.
         self.ssl_ca_cert = None
-        # client certificate file
+        # unipayment certificate file
         self.cert_file = None
-        # client key file
+        # unipayment key file
         self.key_file = None
         # Set this to True/False to enable/disable SSL hostname verification.
         self.assert_hostname = None

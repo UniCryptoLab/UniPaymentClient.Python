@@ -16,7 +16,7 @@ from six.moves.urllib.parse import urlencode
 try:
     import urllib3
 except ImportError:
-    raise ImportError('python client requires urllib3.')
+    raise ImportError('python unipayment requires urllib3.')
 
 logger = logging.getLogger(__name__)
 

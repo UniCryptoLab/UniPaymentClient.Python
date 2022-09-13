@@ -13,6 +13,7 @@ class CreateInvoiceRequest(object):
         'price_amount': 'float',
         'price_currency': 'str',
         'pay_currency': 'str',
+        'network': 'str',
         'notify_url': 'str',
         'redirect_url': 'str',
         'order_id': 'str',
@@ -27,6 +28,7 @@ class CreateInvoiceRequest(object):
         'price_amount': 'price_amount',
         'price_currency': 'price_currency',
         'pay_currency': 'pay_currency',
+        'network': 'network',
         'notify_url': 'notify_url',
         'redirect_url': 'redirect_url',
         'order_id': 'order_id',
@@ -35,7 +37,7 @@ class CreateInvoiceRequest(object):
     }
 
     def __init__(self, title=None, description=None, lang=None, price_amount=None, price_currency=None,
-                 pay_currency=None, notify_url=None, redirect_url=None, order_id=None, ext_args=None,
+                 pay_currency=None, network=None, notify_url=None, redirect_url=None, order_id=None, ext_args=None,
                  confirm_speed=None):  # noqa: E501
         self._title = None
         self._description = None
@@ -43,6 +45,7 @@ class CreateInvoiceRequest(object):
         self._price_amount = None
         self._price_currency = None
         self._pay_currency = None
+        self._network = None
         self._notify_url = None
         self._redirect_url = None
         self._order_id = None
@@ -61,6 +64,8 @@ class CreateInvoiceRequest(object):
             self.price_currency = price_currency
         if pay_currency is not None:
             self.pay_currency = pay_currency
+        if network is not None:
+            self.network = network
         if notify_url is not None:
             self.notify_url = notify_url
         if redirect_url is not None:
@@ -119,6 +124,14 @@ class CreateInvoiceRequest(object):
     @pay_currency.setter
     def pay_currency(self, pay_currency):
         self._pay_currency = pay_currency
+
+    @property
+    def network(self):
+        return self._network
+
+    @network.setter
+    def network(self, network):
+        self._network = network
 
     @property
     def notify_url(self):

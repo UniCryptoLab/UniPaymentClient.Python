@@ -10,9 +10,7 @@ import os
 import platform
 import re
 import tempfile
-import urllib
-import urllib.parse
-import urllib.request
+
 import uuid
 from base64 import b64encode
 from hashlib import md5
@@ -21,10 +19,11 @@ from time import time
 
 import six
 from six.moves.urllib.parse import quote
+from six.moves.urllib.parse import urlencode
 
-from UniPaymentClient import client
-from UniPaymentClient.client import rest
-from UniPaymentClient.client.configuration import Configuration
+from . import models
+from .rest import RESTClientObject, ApiException
+from .configuration import Configuration
 
 
 # python 2 and python 3 compatibility library
@@ -50,7 +49,7 @@ class ApiClient(object):
         self.configuration = configuration
 
         self.pool = ThreadPool()
-        self.rest_client = rest.RESTClientObject(configuration)
+        self.rest_client = RESTClientObject(configuration)
         self.default_headers = {}
         if header_name is not None:
             self.default_headers[header_name] = header_value
@@ -239,7 +238,7 @@ class ApiClient(object):
             if klass in self.NATIVE_TYPES_MAPPING:
                 klass = self.NATIVE_TYPES_MAPPING[klass]
             else:
-                klass = getattr(client.models, klass)
+                klass = getattr(models, klass)
 
         if klass in self.PRIMITIVE_TYPES:
             return self.__deserialize_primitive(data, klass)
@@ -603,9 +602,9 @@ class ApiClient(object):
         """
         uri = url
         if query_params is not None:
-            uri += '?' + urllib.parse.urlencode(query_params)
+            uri += '?' + urlencode(query_params)
 
-        uri = urllib.parse.quote(str.lower(uri), safe='')
+        uri = quote(uri.lower(), safe='')
 
         request_body_based64 = ''
         if request_body is not None:
