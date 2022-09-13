@@ -1,3 +1,1 @@
-# UniPaymentClient.Python
-
-https://unipayment.readme.io/
+UniPaymentClient/README.md
