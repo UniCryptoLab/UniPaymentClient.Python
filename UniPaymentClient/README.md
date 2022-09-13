@@ -1,4 +1,7 @@
 # UniPayment Python Client
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/UniCryptoLab/UniPaymentClient.Python/blob/main/UniPaymentClient/LICENSE.txt)
+[![PyPI](https://img.shields.io/pypi/v/unipayment.svg?style=flat-square)](https://pypi.org/project/unipayment)
+
 A Python client for the [UniPayment Client API](https://unipayment.readme.io/reference/overview).  
 
 This SDK provides a convenient abstraction of UniPayment's Gateway API and allows developers to focus on payment flow/e-commerce integration rather than on the specific details of client-server interaction using the raw API.
