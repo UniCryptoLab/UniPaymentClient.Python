@@ -27,7 +27,7 @@ from .configuration import Configuration
 
 
 # python 2 and python 3 compatibility library
-SDK_VERSION = '1.0.1'
+SDK_VERSION = '1.0.2'
 
 class ApiClient(object):
     PRIMITIVE_TYPES = (float, bool, bytes, six.text_type) + six.integer_types
@@ -124,7 +124,7 @@ class ApiClient(object):
         url = self.configuration.host + resource_path
 
         # Authentication setting
-        hmac_digest = self.sign_request(app_id=self.configuration.app_id, api_key=self.configuration.api_key,
+        hmac_digest = self.sign_request(client_id=self.configuration.client_id, client_secret=self.configuration.client_secret,
                                         request_http_method=method,
                                         url=url, query_params=query_params, request_body=body)
 
@@ -590,11 +590,11 @@ class ApiClient(object):
                 instance = self.__deserialize(data, klass_name)
         return instance
 
-    def sign_request(self, app_id, api_key, request_http_method, url, query_params, request_body=None):
+    def sign_request(self, client_id, client_secret, request_http_method, url, query_params, request_body=None):
         """Create the HMAC SHA-256 Signatute
 
-        :param string: app_id.
-        :param string: api_key.
+        :param string: client_id.
+        :param string: client_secret.
         :param string: request_http_method.
         :param string: query_params.
         :param string: request_body.
@@ -615,7 +615,7 @@ class ApiClient(object):
         nonce = uuid.uuid4().hex
         request_timestamp = int(time())
 
-        raw_data = '{}{}{}{}{}{}'.format(app_id, request_http_method, uri, request_timestamp, nonce,
+        raw_data = '{}{}{}{}{}{}'.format(client_id, request_http_method, uri, request_timestamp, nonce,
                                          request_body_based64)
-        signature = hmac.new(api_key.encode('utf-8'), msg=raw_data.encode('utf-8'), digestmod=hashlib.sha256).digest()
-        return '{}:{}:{}:{}'.format(app_id, b64encode(signature).decode('utf-8'), nonce, request_timestamp)
+        signature = hmac.new(client_secret.encode('utf-8'), msg=raw_data.encode('utf-8'), digestmod=hashlib.sha256).digest()
+        return '{}:{}:{}:{}'.format(client_id, b64encode(signature).decode('utf-8'), nonce, request_timestamp)

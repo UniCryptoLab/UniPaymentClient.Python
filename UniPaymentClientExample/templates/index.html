@@ -64,17 +64,24 @@
                 {% endif %}
                 <form method="POST" action="create-invoice">
                     <div class="row mb-3">
-                        <label for="appId" class="col-sm-2 col-form-label">App ID</label>
+                        <label for="clientId" class="col-sm-2 col-form-label">Client ID</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="appId" placeholder="APP ID" name="appId"
-                                   value="{{appId}}" required>
+                            <input type="text" class="form-control" id="clientId" placeholder="Client ID" name="clientId"
+                                   value="{{clientId}}" required>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="apiKey" class="col-sm-2 col-form-label">Api Key</label>
+                        <label for="clientSecret" class="col-sm-2 col-form-label">Client Secret</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="apiKey" placeholder="API Key" name="apiKey"
-                                   value="{{apiKey}}" required>
+                            <input type="text" class="form-control" id="clientSecret" placeholder="Client Secret" name="clientSecret"
+                                   value="{{clientSecret}}" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="appId" class="col-sm-2 col-form-label">App Id</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="appId" placeholder="App ID" name="appId"
+                                   value="{{appId}}" required>
                         </div>
                     </div>
                     <div class="row mb-3">

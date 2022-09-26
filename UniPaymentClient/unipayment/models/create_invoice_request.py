@@ -7,6 +7,7 @@ import six
 
 class CreateInvoiceRequest(object):
     field_types = {
+        'app_id': 'str',
         'title': 'str',
         'description': 'str',
         'lang': 'str',
@@ -22,6 +23,7 @@ class CreateInvoiceRequest(object):
     }
 
     attribute_map = {
+        'app_id': 'app_id',
         'title': 'title',
         'description': 'description',
         'lang': 'lang',
@@ -36,9 +38,10 @@ class CreateInvoiceRequest(object):
         'confirm_speed': 'confirm_speed'
     }
 
-    def __init__(self, title=None, description=None, lang=None, price_amount=None, price_currency=None,
+    def __init__(self, app_id=None, title=None, description=None, lang=None, price_amount=None, price_currency=None,
                  pay_currency=None, network=None, notify_url=None, redirect_url=None, order_id=None, ext_args=None,
                  confirm_speed=None):  # noqa: E501
+        self._app_id = None
         self._title = None
         self._description = None
         self._lang = None
@@ -52,6 +55,8 @@ class CreateInvoiceRequest(object):
         self._ext_args = None
         self._confirm_speed = None
         self.discriminator = None
+        if app_id is not None:
+            self._app_id = app_id
         if title is not None:
             self.title = title
         if description is not None:
@@ -76,6 +81,14 @@ class CreateInvoiceRequest(object):
             self.ext_args = ext_args
         if confirm_speed is not None:
             self.confirm_speed = confirm_speed
+
+    @property
+    def app_id(self):
+        return self._app_id
+
+    @app_id.setter
+    def app_id(self, app_id):
+        self._app_id = app_id
 
     @property
     def title(self):

@@ -13,9 +13,12 @@ from unipayment import CreateInvoiceRequest, QueryInvoiceRequest
 class TestUniPaymentClient(unittest.TestCase):
 
     def setUp(self):
-        app_id = 'cee1b9e2-d90c-4b63-9824-d621edb38012'
-        api_key = '9G62Fd7fCQGyznVvatk4SAfGsHDEt819E'
-        self.client = UniPaymentClient(app_id, api_key, True, True)
+        self.client_id = '74feb539-ba5a-4ae9-b901-4da4fb539574'
+        self.client_secret = 'BsoRhgqzhR1TYMtwTRYdPxBTvR5rxkW9K'
+        self.app_id = '2a9bd90b-fe95-4659-83cb-04de662fbbac'
+        self.invoice_id = 'SrAARgNrPgvveiBQtNc4gk'
+        self.notify = ''
+        self.client = UniPaymentClient(self.client_id, self.client_secret, True, True)
 
     def tearDown(self):
         pass
@@ -24,6 +27,7 @@ class TestUniPaymentClient(unittest.TestCase):
         """Test case for create_invoice
 
         """
+        app_id = self.app_id
         price_amount = 100
         price_currency = 'USD'
         pay_currency = 'USDT'
@@ -36,7 +40,7 @@ class TestUniPaymentClient(unittest.TestCase):
         ext_args = None
         confirm_speed = 'low'
 
-        create_invoice_request = CreateInvoiceRequest(price_amount=price_amount, price_currency=price_currency,
+        create_invoice_request = CreateInvoiceRequest(app_id=app_id, price_amount=price_amount, price_currency=price_currency,
                                                       pay_currency=pay_currency, notify_url=notify_url,
                                                       redirect_url=redirect_url,
                                                       order_id=order_id, title=title, description=description,
@@ -56,7 +60,7 @@ class TestUniPaymentClient(unittest.TestCase):
         """Test case for get_invoice_by_id
 
         """
-        get_invoice_by_id_response = self.client.get_invoice_by_id('9EfHVGLDjQssJv7xnBsDSM')
+        get_invoice_by_id_response = self.client.get_invoice_by_id(self.invoice_id)
         self.assertEqual('OK', get_invoice_by_id_response.code)
 
     def test_get_exchange_rates_by_fiat_currency(self):

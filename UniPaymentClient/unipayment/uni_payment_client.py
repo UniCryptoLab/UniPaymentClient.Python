@@ -14,10 +14,10 @@ from .configuration import Configuration
 
 
 class UniPaymentClient(object):
-    def __init__(self, app_id, api_key, is_sandbox=False, debug=False):
+    def __init__(self, client_id, client_secret, is_sandbox=False, debug=False):
         self.configuration = Configuration()
-        self.configuration.app_id = app_id
-        self.configuration.api_key = api_key
+        self.configuration.client_id = client_id
+        self.configuration.client_secret = client_secret
         self.configuration.debug = debug
         if is_sandbox:
             self.configuration.host = "https://sandbox-api.unipayment.io"

@@ -32,7 +32,7 @@ pip install unipayment
 ```python
 from unipayment import UniPaymentClient
 
-client = unipayment(APP_ID,API_KEY)
+client = UniPaymentClient('client id','client secret')
 ```
 
 Sandbox is used in the same way with is_sandbox as true.
@@ -40,7 +40,7 @@ Sandbox is used in the same way with is_sandbox as true.
 ```python
 from unipayment import UniPaymentClient
 
-now_pay = unipayment(APP_ID,API_KEY,is_sandbox=True)
+now_pay = UniPaymentClient('client id', 'client secret',is_sandbox=True)
 ```
 
 ## Create an invoice
@@ -49,8 +49,8 @@ now_pay = unipayment(APP_ID,API_KEY,is_sandbox=True)
 ```python
 from unipayment import UniPaymentClient, CreateInvoiceRequest
 
-app_id='your app id'
-api_key='your api key'
+client_id='your client id'
+client_secret='your client secret'
 
 request = CreateInvoiceRequest()
 request.price_amount=10
@@ -61,7 +61,7 @@ request.order_id='#123456'
 request.title='MacBook Air'
 request.description='MacBookAir (256#)'
 
-client = UniPaymentClient(app_id, api_key)
+client = UniPaymentClient(client_id, client_secret)
 create_invoice_response = client.create_invoice(request)
 ```
 ### CreateInvoiceResponse

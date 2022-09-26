@@ -7,6 +7,7 @@ import six
 
 class QueryInvoiceRequest(object):
     field_types = {
+        'app_id': 'str',
         'invoice_id': 'str',
         'order_id': 'str',
         'status': 'str',
@@ -18,6 +19,7 @@ class QueryInvoiceRequest(object):
     }
 
     attribute_map = {
+        'app_id': 'appId',
         'invoice_id': 'invoiceId',
         'order_id': 'orderId',
         'status': 'status',
@@ -28,8 +30,9 @@ class QueryInvoiceRequest(object):
         'end': 'end'
     }
 
-    def __init__(self, invoice_id=None, order_id=None, status=None,
+    def __init__(self, app_id=None, invoice_id=None, order_id=None, status=None,
                  page_no=None, page_size=None, is_asc=None, start=None, end=None):  # noqa: E501
+        self._app_id = None
         self._invoice_id = None
         self._order_id = None
         self._status = None
@@ -39,6 +42,8 @@ class QueryInvoiceRequest(object):
         self._start = None
         self._end = None
         self.discriminator = None
+        if app_id is not None:
+            self._app_id = app_id
         if invoice_id is not None:
             self.invoice_id = invoice_id
         if order_id is not None:
@@ -55,6 +60,14 @@ class QueryInvoiceRequest(object):
             self.start = start
         if end is not None:
             self.end = end
+
+    @property
+    def app_id(self):
+        return self._app_id
+
+    @app_id.setter
+    def app_id(self, app_id):
+        self._app_id = app_id
 
     @property
     def invoice_id(self):

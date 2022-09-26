@@ -32,11 +32,11 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
         # Default Base url
         self.host = ""
 
-        # dict to store APP Id
-        self.app_id = ""
+        # dict to store Client Id
+        self.client_id = ""
 
-        # dict to store API key
-        self.api_key = ""
+        # dict to store Client Secret
+        self.client_secret = ""
 
         # dict to store API Version
         self.api_version = "1.0"
