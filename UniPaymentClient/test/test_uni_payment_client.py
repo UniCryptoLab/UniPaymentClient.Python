@@ -5,9 +5,8 @@ from __future__ import absolute_import
 import unittest
 import uuid
 
-import unipayment
-from unipayment import Configuration, ApiClient, UniPaymentClient
-from unipayment import CreateInvoiceRequest, QueryInvoiceRequest
+from unipayment import CreateInvoiceRequest, QueryInvoiceRequest, CreateWithdrawalRequest, CancelWithdrawalRequest
+from unipayment import UniPaymentClient
 
 
 class TestUniPaymentClient(unittest.TestCase):
@@ -36,11 +35,12 @@ class TestUniPaymentClient(unittest.TestCase):
         order_id = uuid.uuid4().hex
         title = 'Test Invoice'
         description = 'Test Desc'
-        lang = 'en-US'
+        lang = 'en'
         ext_args = None
         confirm_speed = 'low'
 
-        create_invoice_request = CreateInvoiceRequest(app_id=app_id, price_amount=price_amount, price_currency=price_currency,
+        create_invoice_request = CreateInvoiceRequest(app_id=app_id, price_amount=price_amount,
+                                                      price_currency=price_currency,
                                                       pay_currency=pay_currency, notify_url=notify_url,
                                                       redirect_url=redirect_url,
                                                       order_id=order_id, title=title, description=description,
@@ -90,6 +90,54 @@ class TestUniPaymentClient(unittest.TestCase):
         """
         get_currencies_response = self.client.get_currencies()
         self.assertEqual('OK', get_currencies_response.code)
+
+    def test_get_wallet_balances(self):
+        """Test case for get_wallet_balances
+
+        """
+        wallet_balances_response = self.client.get_wallet_balances()
+        self.assertEqual('OK', wallet_balances_response.code)
+
+    def test_create_withdrawal(self):
+        """Test case for create_withdrawal
+
+        """
+        create_withdrawal_request = CreateWithdrawalRequest(amount=1.01, asset_type="USDT", include_fee=True,
+                                                            auto_confirm=True, network="NETWORK_BSC")
+        create_withdrawal_response = self.client.create_withdrawal(create_withdrawal_request)
+        self.assertEqual('OK', create_withdrawal_response.code)
+
+    def test_get_withdrawal_by_id(self):
+        """Test case for get_withdrawal_by_id
+
+        """
+        get_withdrawal_by_id_response = self.client.get_withdrawal_by_id(
+            withdrawal_id='12e0c40f-9df1-40a0-a336-029081b3a638')
+        self.assertEqual('OK', get_withdrawal_by_id_response.code)
+
+    def test_get_withdrawal_by_id(self):
+        """Test case for cancel_withdrawal
+
+        """
+        cancel_withdrawal_request = CancelWithdrawalRequest(id="a6389658-ac47-42f7-b71e-4bd1dc51ee2d")
+        cancel_withdrawal_response = self.client.cancel_withdrawal(cancel_withdrawal_request)
+        self.assertEqual('OK', cancel_withdrawal_response.code)
+
+    def test_query_withdrawals(self):
+        """Test case for query_withdrawals
+
+        """
+        query_withdrawals_response = self.client.query_withdrawals()
+        print(query_withdrawals_response)
+        self.assertEqual('OK', query_withdrawals_response.code)
+
+    def test_query_payouts(self):
+        """Test case for query_payouts
+
+        """
+        query_payouts_response = self.client.query_payouts()
+        print(query_payouts_response)
+        self.assertEqual('OK', query_payouts_response.code)
 
 
 if __name__ == '__main__':

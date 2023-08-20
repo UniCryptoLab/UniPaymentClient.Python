@@ -10,6 +10,7 @@ import six
 from .api_client import ApiClient
 from .configuration import Configuration
 
+
 # python 2 and python 3 compatibility library
 
 
@@ -756,6 +757,733 @@ class UniPaymentClient(object):
             post_params=form_params,
             files=local_var_files,
             response_type='CheckIpnResponse',
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def get_wallet_balances(self, **kwargs):
+        """get_wallet_balances  
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_wallet_balances(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: ResponseListBalanceModel
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_wallet_balances_with_http_info(**kwargs)
+        else:
+            (data) = self.get_wallet_balances_with_http_info(**kwargs)
+            return data
+
+    def get_wallet_balances_with_http_info(self, **kwargs):
+        """get_wallet_balances  
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_wallet_balances_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: ResponseListBalanceModel
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['async_req']
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_wallet_balances" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+        query_params.append(('rd', datetime.utcnow().strftime('%Y%m%d%H%M%S%f')))
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['*/*'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(
+            '/v' + self.configuration.api_version + '/wallet/balances', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ResponseListBalanceModel',
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def create_withdrawal(self, create_withdraw_request, **kwargs):
+        """create_withdrawal
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_withdrawal(create_withdraw_request, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param CreateWithdrawalRequest create_withdraw_request: (required)
+        :return: ResponseWithdrawalModel
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.create_withdrawal_with_http_info(create_withdraw_request, **kwargs)
+        else:
+            (data) = self.create_withdrawal_with_http_info(create_withdraw_request, **kwargs)
+            return data
+
+    def create_withdrawal_with_http_info(self, create_withdraw_request, **kwargs):
+        """create_withdrawal
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_withdrawal_with_http_info(create_withdraw_request, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param CreateWithdrawalRequest create_withdraw_request: (required)
+        :return: ResponseWithdrawalModel
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['create_withdraw_request']
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_withdrawal" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        # verify the required parameter 'request' is set
+        if ('create_withdraw_request' not in params or
+                params['create_withdraw_request'] is None):
+            raise ValueError(
+                "Missing the required parameter `create_withdraw_request` when calling `create_withdrawal`")
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = None
+
+        body_params = None
+        if 'create_withdraw_request' in params:
+            body_params = params['create_withdraw_request'].to_dict()
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['*/*'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(
+            '/v' + self.configuration.api_version + '/wallet/withdrawals', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ResponseWithdrawalModel',
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def get_withdrawal_by_id(self, withdrawal_id, **kwargs):
+        """get_withdrawal_by_id
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_withdrawal_by_id(withdrawal_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str withdrawal_id: (required)
+        :return: ResponseWithdrawalModel
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_withdrawal_by_id_with_http_info(withdrawal_id, **kwargs)
+        else:
+            (data) = self.get_withdrawal_by_id_with_http_info(withdrawal_id, **kwargs)
+            return data
+
+    def get_withdrawal_by_id_with_http_info(self, withdrawal_id, **kwargs):
+        """get_withdrawal_by_id
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_withdrawal_by_id_with_http_info(withdrawal_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str withdrawal_id: (required)
+        :return: ResponseWithdrawalModel
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['withdrawal_id']
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_withdrawal_by_id" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'withdrawal_id' is set
+        if ('withdrawal_id' not in params or
+                params['withdrawal_id'] is None):
+            raise ValueError(
+                "Missing the required parameter `withdrawal_id` when calling `get_withdrawal_by_id`")
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'withdrawal_id' in params:
+            path_params['withdrawalId'] = params['withdrawal_id']
+
+        query_params = None
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['*/*'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(
+            '/v' + self.configuration.api_version + '/wallet/withdrawals/{withdrawalId}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ResponseWithdrawalModel',
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def cancel_withdrawal(self, cancel_withdrawal_request, **kwargs):
+        """cancel_withdrawal
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.cancel_withdrawal(cancel_withdrawal_request, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param CancelWithdrawalRequest cancel_withdrawal_request: (required)
+        :return: ResponseVoid
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.cancel_withdrawal_with_http_info(cancel_withdrawal_request, **kwargs)
+        else:
+            (data) = self.cancel_withdrawal_with_http_info(cancel_withdrawal_request, **kwargs)
+            return data
+
+    def cancel_withdrawal_with_http_info(self, cancel_withdrawal_request, **kwargs):
+        """cancel_withdrawal
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.cancel_withdrawal_with_http_info(cancel_withdrawal_request, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param CancelWithdrawalRequest cancel_withdrawal_request: (required)
+        :return: ResponseVoid
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['cancel_withdrawal_request']
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method cancel_withdrawal" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'cancel_withdrawal_request' is set
+        if ('cancel_withdrawal_request' not in params or
+                params['cancel_withdrawal_request'] is None):
+            raise ValueError(
+                "Missing the required parameter `cancel_withdrawal_request` when calling `cancel_withdrawal`")
+
+        collection_formats = {}
+
+        path_params = None
+
+        query_params = None
+
+        body_params = None
+        if 'cancel_withdrawal_request' in params:
+            body_params = params['cancel_withdrawal_request'].to_dict()
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['*/*'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(
+            '/v' + self.configuration.api_version + '/wallet/withdrawals/cancel', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ResponseVoid',
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def query_withdrawals(self, **kwargs):
+        """query_withdrawals
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.query_withdrawals(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: ResponseQueryResultWithdrawalModel
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.query_withdrawals_with_http_info(**kwargs)
+        else:
+            (data) = self.query_withdrawals_with_http_info(**kwargs)
+            return data
+
+    def query_withdrawals_with_http_info(self, **kwargs):
+        """query_withdrawals
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.query_withdrawals_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: ResponseQueryResultWithdrawalModel
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['']
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method query_withdrawals" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = None
+
+        query_params = None
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['*/*'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(
+            '/v' + self.configuration.api_version + '/wallet/withdrawals', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ResponseQueryResultWithdrawalModel',
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def create_payout(self, create_payout_request, **kwargs):
+        """create_payout
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_payout(create_payout_request, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param CreatePayoutRequest create_payout_request: (required)
+        :return: ResponsePayoutDetailModel
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.create_payout_with_http_info(create_payout_request, **kwargs)
+        else:
+            (data) = self.create_payout_with_http_info(create_payout_request, **kwargs)
+            return data
+
+    def create_payout_with_http_info(self, create_payout_request, **kwargs):
+        """create_payout
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_payout_with_http_info(create_payout_request, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param CreatePayoutRequest create_payout_request: (required)
+        :return: ResponsePayoutDetailModel
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['create_payout_request']
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_payout" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'create_payout_request' is set
+        if ('create_payout_request' not in params or
+                params['create_payout_request'] is None):
+            raise ValueError("Missing the required parameter `request` when calling `create_payout`")
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = None
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'create_payout_request' in params:
+            body_params = params['create_payout_request'].to_dict()
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['*/*'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(
+            '/v' + self.configuration.api_version + '/payouts', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ResponsePayoutDetailModel',
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def get_payout_by_id(self, payout_id, **kwargs):
+        """get_payout_by_id
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_payout_by_id(payout_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str payout_id: (required)
+        :return: ResponsePayoutDetailModel
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_payout_by_id_with_http_info(payout_id, **kwargs)
+        else:
+            (data) = self.get_payout_by_id_with_http_info(payout_id, **kwargs)
+            return data
+
+    def get_payout_by_id_with_http_info(self, payout_id, **kwargs):
+        """get_payout_by_id
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_payout_by_id_with_http_info(payout_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str payout_id: (required)
+        :return: ResponsePayoutDetailModel
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['payout_id']
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_payout_by_id" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'payout_id' is set
+        if ('payout_id' not in params or
+                params['payout_id'] is None):
+            raise ValueError("Missing the required parameter `payout_id` when calling `get_payout_by_id`")
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'payout_id' in params:
+            path_params['payoutId'] = params['payout_id']
+
+        query_params = None
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['*/*'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(
+            '/v' + self.configuration.api_version + '/payouts/{payoutId}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ResponsePayoutDetailModel',
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def query_payouts(self, **kwargs):
+        """query_payouts
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.query_payouts(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: ResponseQueryResultPayoutModel
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.query_payouts_with_http_info(**kwargs)
+        else:
+            (data) = self.query_payouts_with_http_info(**kwargs)
+            return data
+
+    def query_payouts_with_http_info(self, **kwargs):
+        """query_payouts
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.query_payouts_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: ResponseQueryResultPayoutModel
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['']
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method query_payouts" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = None
+
+        query_params = None
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['*/*'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(
+            '/v' + self.configuration.api_version + '/payouts', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ResponseQueryResultPayoutModel',
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
