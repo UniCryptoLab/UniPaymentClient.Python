@@ -5,7 +5,7 @@ import pprint
 import six
 
 
-class ResponseVoid(object):
+class ResponseCancelWithdrawal(object):
     field_types = {
         'code': 'str',
         'msg': 'str',
@@ -74,7 +74,7 @@ class ResponseVoid(object):
                 ))
             else:
                 result[attr] = value
-        if issubclass(ResponseVoid, dict):
+        if issubclass(ResponseCancelWithdrawal, dict):
             for key, value in self.items():
                 result[key] = value
 
@@ -87,7 +87,7 @@ class ResponseVoid(object):
         return self.to_str()
 
     def __eq__(self, other):
-        if not isinstance(other, ResponseVoid):
+        if not isinstance(other, ResponseCancelWithdrawal):
             return False
 
         return self.__dict__ == other.__dict__

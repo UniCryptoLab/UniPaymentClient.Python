@@ -32,7 +32,7 @@ from .response_list_balance_model import ResponseListBalanceModel
 from .response_payout_detail_model import ResponsePayoutDetailModel
 from .response_query_result_payout_model import ResponseQueryResultPayoutModel
 from .response_query_result_payout_model import ResponseQueryResultPayoutModel
-from .response_void import ResponseVoid
+from .response_cancel_withdrawal import ResponseCancelWithdrawal
 from .response_withdrawal_model import ResponseWithdrawalModel
 from .withdrawal_model import WithdrawalModel
 from .response_query_result_withdrawal_model import ResponseQueryResultWithdrawalModel
@@ -44,5 +44,5 @@ __all__ = ['CreateInvoiceRequest', 'InvoiceModel', 'QueryInvoiceRequest', 'Invoi
            'QueryIpsResponse', 'CurrencyModel', 'GetCurrenciesResponse', 'CheckIpnResponse', 'BalanceModel',
            'CancelWithdrawalRequest', 'CreatePayoutRequest', 'CreateWithdrawalRequest', 'PayoutDetailModel',
            'PayoutItem', 'PayoutModel', 'PayoutRequestItem', 'QueryResultPayoutModel', 'ResponseListBalanceModel',
-           'ResponsePayoutDetailModel', 'ResponseQueryResultPayoutModel', 'ResponseVoid', 'ResponseWithdrawalModel',
+           'ResponsePayoutDetailModel', 'ResponseQueryResultPayoutModel', 'ResponseCancelWithdrawal', 'ResponseWithdrawalModel',
            'WithdrawalModel', 'ResponseQueryResultWithdrawalModel', 'QueryResultWithdrawalModel']

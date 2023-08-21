@@ -1049,7 +1049,7 @@ class UniPaymentClient(object):
 
         :param async_req bool
         :param CancelWithdrawalRequest cancel_withdrawal_request: (required)
-        :return: ResponseVoid
+        :return: ResponseCancelWithdrawal
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1070,7 +1070,7 @@ class UniPaymentClient(object):
 
         :param async_req bool
         :param CancelWithdrawalRequest cancel_withdrawal_request: (required)
-        :return: ResponseVoid
+        :return: ResponseCancelWithdrawal
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1126,7 +1126,7 @@ class UniPaymentClient(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='ResponseVoid',
+            response_type='ResponseCancelWithdrawal',
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
