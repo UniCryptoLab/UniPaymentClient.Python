@@ -773,7 +773,7 @@ class UniPaymentClient(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: ResponseListBalanceModel
+        :return: GetWalletBalanceResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -841,7 +841,7 @@ class UniPaymentClient(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='ResponseListBalanceModel',
+            response_type='GetWalletBalanceResponse',
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -859,7 +859,7 @@ class UniPaymentClient(object):
 
         :param async_req bool
         :param CreateWithdrawalRequest create_withdraw_request: (required)
-        :return: ResponseWithdrawalModel
+        :return: CreateWithdrawalResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -880,7 +880,7 @@ class UniPaymentClient(object):
 
         :param async_req bool
         :param CreateWithdrawalRequest create_withdraw_request: (required)
-        :return: ResponseWithdrawalModel
+        :return: CreateWithdrawalResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -937,7 +937,7 @@ class UniPaymentClient(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='ResponseWithdrawalModel',
+            response_type='CreateWithdrawalResponse',
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -955,7 +955,7 @@ class UniPaymentClient(object):
 
         :param async_req bool
         :param str withdrawal_id: (required)
-        :return: ResponseWithdrawalModel
+        :return: GetWithdrawalByIdResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -976,7 +976,7 @@ class UniPaymentClient(object):
 
         :param async_req bool
         :param str withdrawal_id: (required)
-        :return: ResponseWithdrawalModel
+        :return: GetWithdrawalByIdResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1031,7 +1031,7 @@ class UniPaymentClient(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='ResponseWithdrawalModel',
+            response_type='GetWithdrawalByIdResponse',
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -1049,7 +1049,7 @@ class UniPaymentClient(object):
 
         :param async_req bool
         :param CancelWithdrawalRequest cancel_withdrawal_request: (required)
-        :return: ResponseCancelWithdrawal
+        :return: CancelWithdrawalResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1070,7 +1070,7 @@ class UniPaymentClient(object):
 
         :param async_req bool
         :param CancelWithdrawalRequest cancel_withdrawal_request: (required)
-        :return: ResponseCancelWithdrawal
+        :return: CancelWithdrawalResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1126,7 +1126,7 @@ class UniPaymentClient(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='ResponseCancelWithdrawal',
+            response_type='CancelWithdrawalResponse',
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -1143,7 +1143,7 @@ class UniPaymentClient(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: ResponseQueryResultWithdrawalModel
+        :return: QueryWithdrawalsResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1163,7 +1163,7 @@ class UniPaymentClient(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: ResponseQueryResultWithdrawalModel
+        :return: QueryWithdrawalsResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1211,7 +1211,7 @@ class UniPaymentClient(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='ResponseQueryResultWithdrawalModel',
+            response_type='QueryWithdrawalsResponse',
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -1229,7 +1229,7 @@ class UniPaymentClient(object):
 
         :param async_req bool
         :param CreatePayoutRequest create_payout_request: (required)
-        :return: ResponsePayoutDetailModel
+        :return: CreatePayoutResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1250,7 +1250,7 @@ class UniPaymentClient(object):
 
         :param async_req bool
         :param CreatePayoutRequest create_payout_request: (required)
-        :return: ResponsePayoutDetailModel
+        :return: CreatePayoutResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1305,7 +1305,7 @@ class UniPaymentClient(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='ResponsePayoutDetailModel',
+            response_type='CreatePayoutResponse',
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -1323,7 +1323,7 @@ class UniPaymentClient(object):
 
         :param async_req bool
         :param str payout_id: (required)
-        :return: ResponsePayoutDetailModel
+        :return: GetPayoutByIdResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1344,7 +1344,7 @@ class UniPaymentClient(object):
 
         :param async_req bool
         :param str payout_id: (required)
-        :return: ResponsePayoutDetailModel
+        :return: GetPayoutByIdResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1398,7 +1398,7 @@ class UniPaymentClient(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='ResponsePayoutDetailModel',
+            response_type='GetPayoutByIdResponse',
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -1415,7 +1415,7 @@ class UniPaymentClient(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: ResponseQueryResultPayoutModel
+        :return: QueryPayoutsResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1435,7 +1435,7 @@ class UniPaymentClient(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: ResponseQueryResultPayoutModel
+        :return: QueryPayoutsResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1483,7 +1483,7 @@ class UniPaymentClient(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='ResponseQueryResultPayoutModel',
+            response_type='QueryPayoutsResponse',
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),

@@ -6,7 +6,7 @@ import pprint
 import six
 
 
-class ResponseQueryResultWithdrawalModel(object):
+class QueryWithdrawalsResponse(object):
     field_types = {
         'code': 'str',
         'msg': 'str',
@@ -75,7 +75,7 @@ class ResponseQueryResultWithdrawalModel(object):
                 ))
             else:
                 result[attr] = value
-        if issubclass(ResponseQueryResultWithdrawalModel, dict):
+        if issubclass(QueryWithdrawalResponse, dict):
             for key, value in self.items():
                 result[key] = value
 
@@ -88,7 +88,7 @@ class ResponseQueryResultWithdrawalModel(object):
         return self.to_str()
 
     def __eq__(self, other):
-        if not isinstance(other, ResponseQueryResultWithdrawalModel):
+        if not isinstance(other, QueryWithdrawalsResponse):
             return False
         return self.__dict__ == other.__dict__
 

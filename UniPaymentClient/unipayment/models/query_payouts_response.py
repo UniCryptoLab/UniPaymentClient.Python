@@ -1,16 +1,16 @@
 # coding: utf-8
 
-
 import pprint
+import re  # noqa: F401
 
 import six
 
 
-class ResponsePayoutDetailModel(object):
+class QueryPayoutsResponse(object):
     field_types = {
         'code': 'str',
         'msg': 'str',
-        'data': 'PayoutDetailModel'
+        'data': 'QueryResultPayoutModel'
     }
 
     attribute_map = {
@@ -75,7 +75,7 @@ class ResponsePayoutDetailModel(object):
                 ))
             else:
                 result[attr] = value
-        if issubclass(ResponsePayoutDetailModel, dict):
+        if issubclass(QueryPayoutsResponse, dict):
             for key, value in self.items():
                 result[key] = value
 
@@ -88,9 +88,8 @@ class ResponsePayoutDetailModel(object):
         return self.to_str()
 
     def __eq__(self, other):
-        if not isinstance(other, ResponsePayoutDetailModel):
+        if not isinstance(other, QueryPayoutsResponse):
             return False
-
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other):

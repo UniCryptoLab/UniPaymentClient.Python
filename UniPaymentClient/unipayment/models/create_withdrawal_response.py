@@ -6,7 +6,7 @@ import pprint
 import six
 
 
-class ResponseWithdrawalModel(object):
+class CreateWithdrawalResponse(object):
     field_types = {
         'code': 'str',
         'msg': 'str',
@@ -75,7 +75,7 @@ class ResponseWithdrawalModel(object):
                 ))
             else:
                 result[attr] = value
-        if issubclass(ResponseWithdrawalModel, dict):
+        if issubclass(CreateWithdrawalResponse, dict):
             for key, value in self.items():
                 result[key] = value
 
@@ -88,7 +88,7 @@ class ResponseWithdrawalModel(object):
         return self.to_str()
 
     def __eq__(self, other):
-        if not isinstance(other, ResponseWithdrawalModel):
+        if not isinstance(other, CreateWithdrawalResponse):
             return False
         return self.__dict__ == other.__dict__
 

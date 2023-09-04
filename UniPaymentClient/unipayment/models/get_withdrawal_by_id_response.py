@@ -6,11 +6,11 @@ import pprint
 import six
 
 
-class ResponseListBalanceModel(object):
+class GetWithdrawalByIdResponse(object):
     field_types = {
         'code': 'str',
         'msg': 'str',
-        'data': 'list[BalanceModel]'
+        'data': 'WithdrawalModel'
     }
 
     attribute_map = {
@@ -75,7 +75,7 @@ class ResponseListBalanceModel(object):
                 ))
             else:
                 result[attr] = value
-        if issubclass(ResponseListBalanceModel, dict):
+        if issubclass(GetWithdrawalByIdResponse, dict):
             for key, value in self.items():
                 result[key] = value
 
@@ -88,7 +88,7 @@ class ResponseListBalanceModel(object):
         return self.to_str()
 
     def __eq__(self, other):
-        if not isinstance(other, ResponseListBalanceModel):
+        if not isinstance(other, GetWithdrawalByIdResponse):
             return False
         return self.__dict__ == other.__dict__
 

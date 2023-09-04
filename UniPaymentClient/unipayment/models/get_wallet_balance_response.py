@@ -1,15 +1,16 @@
 # coding: utf-8
 
+
 import pprint
 
 import six
 
 
-class ResponseCancelWithdrawal(object):
+class GetWalletBalanceResponse(object):
     field_types = {
         'code': 'str',
         'msg': 'str',
-        'data': 'object'
+        'data': 'list[BalanceModel]'
     }
 
     attribute_map = {
@@ -74,7 +75,7 @@ class ResponseCancelWithdrawal(object):
                 ))
             else:
                 result[attr] = value
-        if issubclass(ResponseCancelWithdrawal, dict):
+        if issubclass(GetWalletBalanceResponse, dict):
             for key, value in self.items():
                 result[key] = value
 
@@ -87,9 +88,8 @@ class ResponseCancelWithdrawal(object):
         return self.to_str()
 
     def __eq__(self, other):
-        if not isinstance(other, ResponseCancelWithdrawal):
+        if not isinstance(other, GetWalletBalanceResponse):
             return False
-
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other):
