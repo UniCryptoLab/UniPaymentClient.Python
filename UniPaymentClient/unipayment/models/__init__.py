@@ -34,8 +34,8 @@ from .query_invoice_request import QueryInvoiceRequest
 from .query_invoice_response import QueryInvoiceResponse
 from .query_ips_response import QueryIpsResponse
 from .query_payouts_response import QueryPayoutsResponse
-from .query_result_payout_model import QueryResultPayoutModel
-from .query_result_withdrawal_model import QueryResultWithdrawalModel
+from .payout_page_list_model import PayoutPageListModel
+from .withdrawal_page_list_model import WithdrawalPageListModel
 from .withdrawal_model import WithdrawalModel
 
 __all__ = ['CreateInvoiceRequest', 'InvoiceModel', 'QueryInvoiceRequest', 'InvoicePageListModel',
@@ -43,6 +43,6 @@ __all__ = ['CreateInvoiceRequest', 'InvoiceModel', 'QueryInvoiceRequest', 'Invoi
            'GetInvoiceByIdResponse', 'ExchangeRateModel', 'GetExchangeRatesResponse', 'GetExchangeRateResponse',
            'QueryIpsResponse', 'CurrencyModel', 'GetCurrenciesResponse', 'CheckIpnResponse', 'BalanceModel',
            'CancelWithdrawalRequest', 'CreatePayoutRequest', 'CreateWithdrawalRequest', 'PayoutDetailModel',
-           'PayoutItem', 'PayoutModel', 'PayoutRequestItem', 'QueryResultPayoutModel', 'GetWalletBalanceResponse',
+           'PayoutItem', 'PayoutModel', 'PayoutRequestItem', 'PayoutPageListModel', 'GetWalletBalanceResponse',
            'GetPayoutByIdResponse', 'CreatePayoutResponse', 'GetPayoutByIdResponse', 'CancelWithdrawalResponse',
-           'QueryPayoutsResponse', 'WithdrawalModel', 'GetWithdrawalByIdResponse', 'QueryResultWithdrawalModel']
+           'QueryPayoutsResponse', 'WithdrawalModel', 'GetWithdrawalByIdResponse', 'WithdrawalPageListModel']

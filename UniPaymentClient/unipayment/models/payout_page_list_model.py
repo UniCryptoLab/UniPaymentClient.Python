@@ -6,7 +6,7 @@ import pprint
 import six
 
 
-class QueryResultPayoutModel(object):
+class PayoutPageListModel(object):
     field_types = {
         'models': 'list[PayoutModel]',
         'total': 'int',
@@ -88,7 +88,7 @@ class QueryResultPayoutModel(object):
                 ))
             else:
                 result[attr] = value
-        if issubclass(QueryResultPayoutModel, dict):
+        if issubclass(PayoutPageListModel, dict):
             for key, value in self.items():
                 result[key] = value
 
@@ -101,7 +101,7 @@ class QueryResultPayoutModel(object):
         return self.to_str()
 
     def __eq__(self, other):
-        if not isinstance(other, QueryResultPayoutModel):
+        if not isinstance(other, PayoutPageListModel):
             return False
 
         return self.__dict__ == other.__dict__

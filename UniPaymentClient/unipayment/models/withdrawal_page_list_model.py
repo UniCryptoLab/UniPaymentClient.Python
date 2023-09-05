@@ -6,7 +6,7 @@ import pprint
 import six
 
 
-class QueryResultWithdrawalModel(object):
+class WithdrawalPageListModel(object):
     field_types = {
         'models': 'list[WithdrawalModel]',
         'total': 'int',
@@ -88,7 +88,7 @@ class QueryResultWithdrawalModel(object):
                 ))
             else:
                 result[attr] = value
-        if issubclass(QueryResultWithdrawalModel, dict):
+        if issubclass(WithdrawalPageListModel, dict):
             for key, value in self.items():
                 result[key] = value
 
@@ -101,7 +101,7 @@ class QueryResultWithdrawalModel(object):
         return self.to_str()
 
     def __eq__(self, other):
-        if not isinstance(other, QueryResultWithdrawalModel):
+        if not isinstance(other, WithdrawalPageListModel):
             return False
 
         return self.__dict__ == other.__dict__

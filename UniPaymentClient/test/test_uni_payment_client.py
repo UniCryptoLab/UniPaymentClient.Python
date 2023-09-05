@@ -7,7 +7,7 @@ import uuid
 
 from unipayment import CreateInvoiceRequest, QueryInvoiceRequest, CreateWithdrawalRequest, CancelWithdrawalRequest
 from unipayment import UniPaymentClient
-
+from test_state import JSONifiedState
 
 class TestUniPaymentClient(unittest.TestCase):
 
@@ -18,6 +18,9 @@ class TestUniPaymentClient(unittest.TestCase):
         self.invoice_id = 'SrAARgNrPgvveiBQtNc4gk'
         self.notify = ''
         self.client = UniPaymentClient(self.client_id, self.client_secret, True, True)
+        self.state = JSONifiedState()
+        self.state.restore()
+
 
     def tearDown(self):
         pass
