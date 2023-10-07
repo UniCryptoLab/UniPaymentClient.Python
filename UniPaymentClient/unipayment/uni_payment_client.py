@@ -211,7 +211,7 @@ class UniPaymentClient(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='GetExchangeRatesResponse',
+            response_type='QueryInvoiceResponse',
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
