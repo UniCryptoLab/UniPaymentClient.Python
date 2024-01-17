@@ -56,10 +56,17 @@ class CreateWithdrawalRequest(object):
             self.notify_url = notify_url
         if note is not None:
             self.note = note
+
         if auto_confirm is not None:
             self.auto_confirm = auto_confirm
+        else:
+            self.auto_confirm = False
+
         if include_fee is not None:
             self.include_fee = include_fee
+        else:
+            self.include_fee = True
+
 
     @property
     def network(self):

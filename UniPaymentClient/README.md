@@ -84,10 +84,13 @@ create_invoice_response = client.create_invoice(request)
 
 ```
 
-## Handle IPN
+## Handle Invoice IPN
 > Reference：https://unipayment.readme.io/reference/ipn-check
-
+> 
+> IPN: https://unipayment.readme.io/reference/ipn-payment-notification
+> 
 > Invoice Status: https://unipayment.readme.io/reference/invoice-status
+
 
 IPNs (Instant Payment Notifications) are sent to the notify_url when order status is changed to paid, confirmed and complete. 
 
@@ -143,6 +146,49 @@ IPN notify
 	"notify_time": "2022-09-12T03:56:10.5852752Z"
 }
 ```
+## Create a withdrawal
+> Reference：https://unipayment.readme.io/reference/create-withdrawal
+
+```python
+from unipayment import UniPaymentClient, CreateWithdrawalRequest
+
+client_id='your client id'
+client_secret='your client secret'
+
+request = CreateWithdrawalRequest()
+request.asset_type = "USDT"
+request.amount = 2
+request.network = "NETWORK_TRX"
+request.address = "TCKjKQC5Dxzjg6eMTpFG9r1Mf3PNtegQeF"
+request.auto_confirm = False
+request.include_fee = True
+
+
+client = UniPaymentClient(client_id, client_secret)
+create_withdrawal_response = client.create_withdrawal(request)
+```
+
+### CreateWithdrawalResponse
+
+```python
+{'code': 'OK',
+ 'data': {'address': 'TCKjKQC5Dxzjg6eMTpFG9r1Mf3PNtegQeF',
+          'amount': 2.0,
+          'asset_type': 'USDT',
+          'create_time': datetime.datetime(2024, 1, 17, 2, 20),
+          'fee': 1.0,
+          'id': 'f81456f5-299e-4975-b35b-9779e9422a73',
+          'network': 'NETWORK_TRX',
+          'status': 'Pending',
+          'txn_hash': None},
+ 'msg': ''}
+```
+ 
+## Handle Withdrawal IPN
+> Reference：https://unipayment.readme.io/reference/ipn-check
+
+> IPN: https://unipayment.readme.io/reference/ipn-withdrawal-notification
+
 
 ## Run Example
 

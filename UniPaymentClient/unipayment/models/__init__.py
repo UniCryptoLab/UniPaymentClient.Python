@@ -12,6 +12,7 @@ from .create_invoice_response import CreateInvoiceResponse
 from .create_payout_request import CreatePayoutRequest
 from .create_payout_response import CreatePayoutResponse
 from .create_withdrawal_request import CreateWithdrawalRequest
+from .create_withdrawal_response import CreateWithdrawalResponse
 from .currency_model import CurrencyModel
 from .exchange_rate_model import ExchangeRateModel
 from .get_currencies_response import GetCurrenciesResponse
@@ -45,4 +46,5 @@ __all__ = ['CreateInvoiceRequest', 'InvoiceModel', 'QueryInvoiceRequest', 'Invoi
            'CancelWithdrawalRequest', 'CreatePayoutRequest', 'CreateWithdrawalRequest', 'PayoutDetailModel',
            'PayoutItem', 'PayoutModel', 'PayoutRequestItem', 'PayoutPageListModel', 'GetWalletBalanceResponse',
            'GetPayoutByIdResponse', 'CreatePayoutResponse', 'GetPayoutByIdResponse', 'CancelWithdrawalResponse',
-           'QueryPayoutsResponse', 'WithdrawalModel', 'GetWithdrawalByIdResponse', 'WithdrawalPageListModel']
+           'QueryPayoutsResponse', 'WithdrawalModel', 'GetWithdrawalByIdResponse', 'WithdrawalPageListModel',
+           'CreateWithdrawalResponse']
