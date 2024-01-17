@@ -27,7 +27,7 @@ from .configuration import Configuration
 
 
 # python 2 and python 3 compatibility library
-SDK_VERSION = '1.1.1'
+SDK_VERSION = '1.1.2'
 
 class ApiClient(object):
     PRIMITIVE_TYPES = (float, bool, bytes, six.text_type) + six.integer_types
