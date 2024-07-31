@@ -1,8 +1,4 @@
-# coding: utf-8
 
-import pprint
-
-import six
 
 
 class BalanceModel(object):
