@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UniPayment SDK v2.0.0 Example | {{title}}</title>
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.min.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/site.css') }}"/>
+
+    <!-- Favicon -->
+    <link href="{{ url_for('static', filename= 'favicon.ico') }}" type="image/x-icon"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn"t work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.2/js/dataTables.min.js"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" href="/">UniPayment SDK v2.0.0 Example</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="https://www.unipayment.io" target="_blank">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="create-invoice">Create</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="query-invoice">Query</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="https://unipayment.readme.io" target="_blank">APIDoc</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <main role="main" class="pb-3">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="text-center">
+                    <h2>Invoice Submit Form</h2>
+                </div>
+                <p>&nbsp;</p>
+                {% if errorCode %}
+                <div class="alert alert-danger" role="alert">
+                    Code:{{errorCode}} Error: {{errorMessage}}
+                </div>
+                {% endif %}
+                <form method="POST" action="create-invoice">
+                    <div class="row mb-3">
+                        <label for="clientId" class="col-sm-2 col-form-label">Client ID</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="clientId" placeholder="Client ID"
+                                   name="clientId"
+                                   value="{{clientId}}" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="clientSecret" class="col-sm-2 col-form-label">Client Secret</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="clientSecret" placeholder="Client Secret"
+                                   name="clientSecret"
+                                   value="{{clientSecret}}" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="appId" class="col-sm-2 col-form-label">App Id</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="appId" placeholder="App ID" name="appId"
+                                   value="{{appId}}" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="priceAmount" class="col-sm-2 col-form-label">Price Amount</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="priceAmount" placeholder="Price Amount"
+                                   value="2"
+                                   name="priceAmount" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="priceCurrency" class="col-sm-2 col-form-label">Price Currency</label>
+                        <div class="col-lg-10">
+                            <select class="custom-select" name="priceCurrency" id="priceCurrency" required>
+                                <option value="USD">USD</option>
+                                <option value="CNY">CNY</option>
+                                <option value="HKD">HKD</option>
+                                <option value="SGD">SGD</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="payCurrency" class="col-sm-2 col-form-label">Pay Currency</label>
+                        <div class="col-lg-10">
+                            <select class="custom-select" name="payCurrency" id="payCurrency">
+                                <option value="">--</option>
+                                <option value="USDT">USDT</option>
+                                <option value="USDC">USDC</option>
+                                <option value="BTC">BTC</option>
+                                <option value="ETH">ETH</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="payCurrency" class="col-sm-2 col-form-label">Network</label>
+                        <div class="col-lg-10">
+                            <select class="custom-select" name="network" id="network">
+                                <option value="">--</option>
+                                <option value="NETWORK_BTC">NETWORK_BTC</option>
+                                <option value="NETWORK_BSC">NETWORK_BSC</option>
+                                <option value="NETWORK_ETH">NETWORK_ETH</option>
+                                <option value="NETWORK_TRX">NETWORK_TRX</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="notifyUrl" class="col-sm-2 col-form-label">Notify URL</label>
+                        <div class="col-lg-10">
+                            <input type="url" class="form-control" id="notifyUrl" placeholder="Notify URL"
+                                   name="notifyUrl" value="https://example.com/notify" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="redirectUrl" class="col-sm-2 col-form-label">Redirect URL</label>
+                        <div class="col-lg-10">
+                            <input type="url" class="form-control" id="redirectUrl" placeholder="Redirect URL"
+                                   name="redirectUrl" value="https://example.com/redirect" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="orderId" class="col-sm-2 col-form-label">Order Id</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="orderId" placeholder="Order Id"
+                                   name="orderId" value="#123456" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="title" class="col-sm-2 col-form-label">Title</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="title" placeholder="Title"
+                                   name="title">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="description" class="col-sm-2 col-form-label">Description</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="description" placeholder="Description"
+                                   name="description">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="lang" class="col-sm-2 col-form-label">Lang</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="lang" placeholder="Lang"
+                                   name="lang" value="en-US" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="extArgs" class="col-sm-2 col-form-label">ExtArgs</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="extArgs" placeholder="ExtArgs"
+                                   name="extArgs">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="confirmSpeed" class="col-sm-2 col-form-label">Confirm Speed</label>
+                        <div class="col-lg-10">
+                            <select class="custom-select" name="confirmSpeed" id="confirmSpeed">
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row text-right">
+                        <div class="col-sm-10 offset-sm-2">
+                            <button type="submit" class="btn btn-primary">Create Invoice</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+<footer class="border-top footer text-muted">
+    <div class="container text-center">
+        &copy; 2022 - UniPayment.Client.Example - <a href="/privacy">Privacy</a>
+    </div>
+</footer>
+
+<footer>
+    <script src="{{ url_for('static', filename= 'js/site.js') }}"></script>
+</footer>
+</body>
+</html>
