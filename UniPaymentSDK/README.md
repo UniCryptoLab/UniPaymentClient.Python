@@ -40,8 +40,7 @@ pip install unipayment
 You can load the configurations using the following:
 
 ```python
-from unipayment.sdk import BillingAPI, BeneficiaryAPI, CommonAPI, OauthTokenAPI, ExchangeAPI, PaymentAPI, WalletAPI
-from unipayment.sdk.core import Configuration
+from unipayment import Configuration, BillingAPI, BeneficiaryAPI, CommonAPI, OauthTokenAPI, ExchangeAPI, PaymentAPI, WalletAPI
 
 self.configuration = Configuration()
 self.configuration.client_id = '071a5fad-9f7e-4785-9fe1-5a5e8d45c518'
