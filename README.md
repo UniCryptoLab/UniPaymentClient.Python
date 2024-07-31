@@ -37,9 +37,7 @@ pip install unipayment
 
 ## Initializing UniPayment SDK Configuration
 
-You can load the configurations using the following options:
-
-1. Programmatically - Initializing the Configuration Object
+You can load the configurations using the following:
 
 ```python
 from unipayment.sdk import BillingAPI, BeneficiaryAPI, CommonAPI, OauthTokenAPI, ExchangeAPI, PaymentAPI, WalletAPI

@@ -23,7 +23,7 @@ integration. [Documentation](https://help.unipayment.io/en/articles/8263248-how-
 
 1. Download the package and extract it into a local directory or clone the repo.
 2. cd into the root directory where setup.py is located.
-3. Enter：
+3. Enter：[README.md](..%2FREADME.md)
 
 ```bash
 python setup.py install
@@ -33,13 +33,11 @@ python setup.py install
 
 ```bash
 pip install unipayment
-```
+```[README.md](..%2FREADME.md)
 
 ## Initializing UniPayment SDK Configuration
 
-You can load the configurations using the following options:
-
-1. Programmatically - Initializing the Configuration Object
+You can load the configurations using the following:
 
 ```python
 from unipayment.sdk import BillingAPI, BeneficiaryAPI, CommonAPI, OauthTokenAPI, ExchangeAPI, PaymentAPI, WalletAPI
