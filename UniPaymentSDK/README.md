@@ -1,4 +1,4 @@
-# UniPayment Python Client
+# UniPayment Python SDK
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/UniCryptoLab/UniPaymentClient.Python/blob/main/UniPaymentClient/LICENSE.txt)
 [![PyPI](https://img.shields.io/pypi/v/unipayment.svg?style=flat-square)](https://pypi.org/project/unipayment)
