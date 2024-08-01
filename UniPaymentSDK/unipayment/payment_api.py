@@ -26,7 +26,7 @@ class PaymentAPI(BaseClient):
                        query_payments_request: QueryPaymentsRequest = None) -> QueryPaymentsResponse:
         url = f'{self.configuration.host}/v{self.configuration.api_version}/payments'
         if query_payments_request is None:
-            query_beneficiaries_request = QueryPaymentsRequest()
+            query_payments_request = QueryPaymentsRequest()
         response_text = self.call_api(url, 'GET', access_token, query_params=query_payments_request.to_str())
         return QueryPaymentsResponse.from_json(response_text)
 

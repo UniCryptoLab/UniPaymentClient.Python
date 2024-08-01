@@ -11,4 +11,4 @@ from unipayment.models import Payment
 class PaymentResponse:
     code: str
     msg: str
-    data: Optional[Payment]
+    data: Optional[Payment] = None

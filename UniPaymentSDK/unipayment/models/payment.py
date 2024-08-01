@@ -16,13 +16,13 @@ class PaymentDestination:
 
 
 class PaymentStatus(Enum):
-    PENDING = "Pending"
-    CANCELED = "Canceled"
-    CONFIRMED = "Confirmed"
-    REJECTED = "Rejected"
-    APPROVED = "Approved"
-    SUCCESS = "Success"
-    FAIL = "Fail"
+    PENDING = "PENDING"
+    CANCELED = "CANCELED"
+    CONFIRMED = "CONFIRMED"
+    REJECTED = "REJECTED"
+    APPROVED = "APPROVED"
+    SUCCESS = "SUCCESS"
+    FAIL = "FAIL"
 
 
 @dataclass_json

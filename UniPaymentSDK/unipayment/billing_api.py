@@ -19,7 +19,6 @@ class BillingAPI(BaseClient):
     def get_invoice_by_id(self, access_token, invoice_id) -> GetInvoiceByIdResponse:
         url = f'{self.configuration.host}/v{self.configuration.api_version}/invoices/{invoice_id}'
         response_text = self.call_api(url, 'GET', access_token)
-        print(response_text)
         return GetInvoiceByIdResponse.from_json(response_text)
 
     def query_invoices(self, access_token, query_invoices_request: QueryInvoicesRequest) -> QueryInvoicesResponse:

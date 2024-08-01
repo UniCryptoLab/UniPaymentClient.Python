@@ -22,7 +22,7 @@ def is_valid(token: str) -> bool:
         return False
 
     try:
-        decoded_part2 = base64.b64decode(parts[1]).decode('utf-8')
+        decoded_part2 = base64.b64decode(parts[1] + "===").decode('utf-8')
         data_map = json.loads(decoded_part2)
         exp = int(data_map.get("exp"))
         exp_in_millis = exp * 1000
@@ -40,6 +40,8 @@ class BaseClient(object):
         self.api_client = ApiClient(self.configuration)
         self.api_client.set_default_header('Accept', 'application/json')
         self.api_client.set_default_header('Content-Type', 'application/json')
+        if configuration.debug:
+            LOGGER.setLevel(logging.DEBUG)
 
     def call_api(self, url, method, access_token, query_params=None, post_params=None, body=None):
         if is_valid(access_token) is False:

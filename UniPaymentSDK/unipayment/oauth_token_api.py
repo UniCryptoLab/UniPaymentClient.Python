@@ -1,5 +1,8 @@
 from __future__ import absolute_import
 
+import json
+
+from . import UnipaymentSdkException
 from .models.token_response import TokenResponse
 from .configuration import Configuration
 from .api_client import ApiClient
@@ -19,4 +22,7 @@ class OauthTokenAPI(object):
 
         url = f'{self.configuration.host}/connect/token'
         response_text = self.api_client.request(url, 'POST', post_params=post_params).data.decode('utf-8')
+        response_json = json.loads(response_text)
+        if 'error' in response_json:
+            raise UnipaymentSdkException(message=response_json['error'])
         return TokenResponse.from_json(response_text)

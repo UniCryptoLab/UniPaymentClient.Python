@@ -14,7 +14,7 @@ class ExchangeAPI(BaseClient):
 
     def get_quote(self, access_token, quote_request: QuoteRequest) -> QuoteResponse:
         url = f'{self.configuration.host}/v{self.configuration.api_version}/exchange/quote'
-        response_text = self.call_api(url, 'POST', access_token, body=json.loads(quote_request.to_json()))
+        response_text = self.call_api(url, 'GET', access_token, query_params=quote_request.to_str())
         return QuoteResponse.from_json(response_text)
 
     def accept_quote(self, access_token, quote_id) -> AcceptQuoteResponse:
