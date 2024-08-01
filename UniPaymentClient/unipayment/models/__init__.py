@@ -38,6 +38,7 @@ from .query_payouts_response import QueryPayoutsResponse
 from .payout_page_list_model import PayoutPageListModel
 from .withdrawal_page_list_model import WithdrawalPageListModel
 from .withdrawal_model import WithdrawalModel
+from .buyer_info import BuyerInfo
 
 __all__ = ['CreateInvoiceRequest', 'InvoiceModel', 'QueryInvoiceRequest', 'InvoicePageListModel',
            'CreateInvoiceResponse', 'QueryInvoiceResponse', 'InvoiceDetailModel', 'InvoiceTransactionModel',
@@ -47,4 +48,5 @@ __all__ = ['CreateInvoiceRequest', 'InvoiceModel', 'QueryInvoiceRequest', 'Invoi
            'PayoutItem', 'PayoutModel', 'PayoutRequestItem', 'PayoutPageListModel', 'GetWalletBalanceResponse',
            'GetPayoutByIdResponse', 'CreatePayoutResponse', 'GetPayoutByIdResponse', 'CancelWithdrawalResponse',
            'QueryPayoutsResponse', 'WithdrawalModel', 'GetWithdrawalByIdResponse', 'WithdrawalPageListModel',
-           'CreateWithdrawalResponse']
+           'CreateWithdrawalResponse','BuyerInfo']
+

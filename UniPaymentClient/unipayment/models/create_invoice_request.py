@@ -19,7 +19,9 @@ class CreateInvoiceRequest(object):
         'redirect_url': 'str',
         'order_id': 'str',
         'ext_args': 'str',
-        'confirm_speed': 'str'
+        'confirm_speed': 'str',
+        'buyer_info': 'BuyerInfo'
+
     }
 
     attribute_map = {
@@ -35,7 +37,8 @@ class CreateInvoiceRequest(object):
         'redirect_url': 'redirect_url',
         'order_id': 'order_id',
         'ext_args': 'ext_args',
-        'confirm_speed': 'confirm_speed'
+        'confirm_speed': 'confirm_speed',
+        'buyer_info': 'buyer_info'
     }
 
     def __init__(self, app_id=None, title=None, description=None, lang=None, price_amount=None, price_currency=None,
@@ -54,6 +57,7 @@ class CreateInvoiceRequest(object):
         self._order_id = None
         self._ext_args = None
         self._confirm_speed = None
+        self._buyer_info = None
         self.discriminator = None
         if app_id is not None:
             self._app_id = app_id
@@ -179,6 +183,14 @@ class CreateInvoiceRequest(object):
         self._ext_args = ext_args
 
     @property
+    def buyer_info(self):
+        return self._buyer_info
+
+    @buyer_info.setter
+    def buyer_info(self, buy_info):
+        self._buyer_info = buy_info
+
+    @property
     def confirm_speed(self):
         return self._confirm_speed
 
@@ -195,7 +207,6 @@ class CreateInvoiceRequest(object):
 
     def to_dict(self):
         result = {}
-
         for attr, _ in six.iteritems(self.field_types):
             value = getattr(self, attr)
             if isinstance(value, list):
