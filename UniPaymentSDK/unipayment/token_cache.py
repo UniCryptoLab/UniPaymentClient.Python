@@ -9,7 +9,7 @@ class TokenCache:
 
     @staticmethod
     def set_access_token(value, ttl=3600):
-        expiry = time.time() + ttl
+        expiry = int(time.time()) + ttl
         TokenCache._cache[TokenCache.ACCESS_TOKEN] = {'expiry': expiry, 'value': value}
 
     @staticmethod

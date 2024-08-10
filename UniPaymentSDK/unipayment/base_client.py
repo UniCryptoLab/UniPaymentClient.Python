@@ -54,7 +54,7 @@ class BaseClient(object):
                 raise ApiException("Unable to get access token")
             else:
                 access_token = token_response.access_token
-                TokenCache.set_access_token(access_token)
+                TokenCache.set_access_token(access_token, token_response.expires_in)
 
         headers = self.api_client.default_headers
         headers['Authorization'] = f'Bearer {access_token}'
