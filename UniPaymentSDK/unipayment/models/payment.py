@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
+from datetime import datetime
 from enum import Enum
+from typing import Optional
 
 from dataclasses_json import dataclass_json, config
-from typing import Optional
-from datetime import datetime
-
 from marshmallow import fields
 
 

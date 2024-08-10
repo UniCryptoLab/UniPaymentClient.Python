@@ -5,9 +5,11 @@ import json
 import logging
 from datetime import datetime
 
-from .configuration import Configuration
 from .api_client import ApiClient
 from .api_exception import ApiException
+from .configuration import Configuration
+from .models import TokenResponse
+from .token_cache import TokenCache
 from .unipayment_sdk_exception import UnipaymentSdkException
 
 LOGGER = logging.getLogger(__name__)
@@ -43,17 +45,36 @@ class BaseClient(object):
         if configuration.debug:
             LOGGER.setLevel(logging.DEBUG)
 
-    def call_api(self, url, method, access_token, query_params=None, post_params=None, body=None):
-        if is_valid(access_token) is False:
-            raise UnipaymentSdkException('Invalid or expired access token')
+    def call_api(self, url, method, query_params=None, post_params=None, body=None):
+        access_token = TokenCache.get_access_token()
+
+        if access_token is None or is_valid(access_token) is False:
+            token_response = self.get_access_token()
+            if token_response is None:
+                raise ApiException("Unable to get access token")
+            else:
+                access_token = token_response.access_token
+                TokenCache.set_access_token(access_token)
 
         headers = self.api_client.default_headers
         headers['Authorization'] = f'Bearer {access_token}'
         response = self.api_client.request(url, method, headers=headers, query_params=query_params,
                                            post_params=post_params, body=body)
-
         status_code = response.status
         if 200 <= status_code < 300:
             return response.data.decode('utf-8')
         else:
             raise ApiException(http_resp=response)
+
+    def get_access_token(self) -> TokenResponse:
+        headers = {'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded'}
+        post_params = {'grant_type': 'client_credentials', 'client_id': self.configuration.client_id,
+                       'client_secret': self.configuration.client_secret}
+
+        url = f'{self.configuration.host}/connect/token'
+        response_text = self.api_client.request(url, 'POST', headers=headers, post_params=post_params).data.decode(
+            'utf-8')
+        response_json = json.loads(response_text)
+        if 'error' in response_json:
+            raise UnipaymentSdkException(message=response_json['error'])
+        return TokenResponse.from_json(response_text)

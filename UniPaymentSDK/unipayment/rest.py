@@ -1,12 +1,14 @@
 from __future__ import absolute_import
+
 import io
 import json
 import logging
 import re
 import ssl
+from urllib.parse import urlencode
+
 import certifi
 import urllib3
-from urllib.parse import urlencode
 
 from .api_exception import ApiException
 

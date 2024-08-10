@@ -1,7 +1,6 @@
 from __future__ import absolute_import
 
 import logging
-import uuid
 
 import pytest
 
@@ -23,7 +22,7 @@ class TestExchangeAPI(TestBaseClient):
             to_currency='BNB',
             exchange_amount=10.0)
 
-        quote_response = self.ExchangeAPI.get_quote(self.access_token, quote_request)
+        quote_response = self.ExchangeAPI.get_quote(quote_request)
         logger.debug("response body: %s", quote_response.to_json())
         self.assertEqual('OK', quote_response.code)
         self.assertIsNotNone(quote_response.data.quote_id)
@@ -41,11 +40,11 @@ class TestExchangeAPI(TestBaseClient):
             to_currency='BNB',
             exchange_amount=10.0)
 
-        quote_response = self.ExchangeAPI.get_quote(self.access_token, quote_request)
+        quote_response = self.ExchangeAPI.get_quote(quote_request)
         logger.debug("response body: %s", quote_response.to_json())
         self.assertEqual('OK', quote_response.code)
 
-        accept_quote_response = self.ExchangeAPI.accept_quote(self.access_token, quote_response.data.quote_id)
+        accept_quote_response = self.ExchangeAPI.accept_quote(quote_response.data.quote_id)
         logger.debug("response body: %s", accept_quote_response.to_json())
         self.assertEqual('OK', accept_quote_response.code)
 
@@ -56,8 +55,8 @@ class TestExchangeAPI(TestBaseClient):
         """
 
         query_exchange_orders_request = QueryExchangeOrdersRequest()
-        query_exchange_orders_response = self.ExchangeAPI.query_exchange_orders(self.access_token,
-                                                                                query_exchange_orders_request)
+        query_exchange_orders_response = self.ExchangeAPI.query_exchange_orders(
+            query_exchange_orders_request)
         logger.debug("response body: %s", query_exchange_orders_response.to_json())
         self.assertEqual('OK', query_exchange_orders_response.code)
 
@@ -66,12 +65,12 @@ class TestExchangeAPI(TestBaseClient):
         """
             Test case query_exchange_order_by_order_id
         """
-        query_exchange_orders_response = self.ExchangeAPI.query_exchange_orders(self.access_token,
-                                                                                QueryExchangeOrdersRequest())
+        query_exchange_orders_response = self.ExchangeAPI.query_exchange_orders(
+            QueryExchangeOrdersRequest())
         logger.debug("response body: %s", query_exchange_orders_response.to_json())
         self.assertEqual('OK', query_exchange_orders_response.code)
         """ Set Order ID """
         order_id = query_exchange_orders_response.data.models[0].get("id")
-        query_exchange_order_response = self.ExchangeAPI.query_exchange_order_by_order_id(self.access_token, order_id)
+        query_exchange_order_response = self.ExchangeAPI.query_exchange_order_by_order_id(order_id)
         logger.debug("response body: %s", query_exchange_order_response.to_json())
         self.assertEqual('OK', query_exchange_order_response.code)

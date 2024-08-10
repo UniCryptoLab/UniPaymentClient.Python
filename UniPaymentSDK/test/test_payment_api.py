@@ -29,7 +29,7 @@ class TestPaymentAPI(TestBaseClient):
             payment_method_id='5c0bce95-7d10-47f3-8e11-250ab900da07',
             unique_id=uuid.uuid4()
         )
-        create_payment_response = self.PaymentAPI.create_payment(self.access_token, create_payment_request)
+        create_payment_response = self.PaymentAPI.create_payment(create_payment_request)
         logger.debug("response body: %s", create_payment_response.to_json())
         self.assertEqual('OK', create_payment_response.code)
 
@@ -42,7 +42,7 @@ class TestPaymentAPI(TestBaseClient):
         """ Set Payment ID """
         payment_id = self.create_payment()
 
-        get_payment_response = self.PaymentAPI.get_payment_by_id(self.access_token, payment_id)
+        get_payment_response = self.PaymentAPI.get_payment_by_id(payment_id)
         logger.debug("response body: %s", get_payment_response.to_json())
         self.assertEqual('OK', get_payment_response.code)
         self.assertIsNotNone(get_payment_response.data)
@@ -56,7 +56,7 @@ class TestPaymentAPI(TestBaseClient):
         """ Set Payment ID """
         payment_id = self.create_payment()
         payment_note = PaymentNote(note="Payment Confirmed")
-        confirm_payment_response = self.PaymentAPI.confirm_payment(self.access_token, payment_id, payment_note)
+        confirm_payment_response = self.PaymentAPI.confirm_payment(payment_id, payment_note)
         logger.debug("response body: %s", confirm_payment_response.to_json())
         self.assertEqual('OK', confirm_payment_response.code)
 
@@ -69,7 +69,7 @@ class TestPaymentAPI(TestBaseClient):
         """ Set Payment ID """
         payment_id = self.create_payment()
         payment_note = PaymentNote(note="Payment Cancelled")
-        cancel_payment_response = self.PaymentAPI.cancel_payment(self.access_token, payment_id, payment_note)
+        cancel_payment_response = self.PaymentAPI.cancel_payment(payment_id, payment_note)
         logger.debug("response body: %s", cancel_payment_response.to_json())
         self.assertEqual('OK', cancel_payment_response.code)
 
@@ -79,7 +79,7 @@ class TestPaymentAPI(TestBaseClient):
             Test case query_payments
         """
         query_payments_request = QueryPaymentsRequest()
-        query_payments_response = self.PaymentAPI.query_payments(self.access_token, query_payments_request)
+        query_payments_response = self.PaymentAPI.query_payments(query_payments_request)
         logger.debug("response body: %s", query_payments_response.to_json())
         self.assertEqual('OK', query_payments_response.code)
         self.assertIsNotNone(query_payments_response.data)
@@ -89,7 +89,7 @@ class TestPaymentAPI(TestBaseClient):
             Test case get_payment_fee
         """
 
-        get_payment_fee_response = self.PaymentAPI.get_payment_fee(self.access_token, 'USDT')
+        get_payment_fee_response = self.PaymentAPI.get_payment_fee('USDT')
         logger.debug("response body: %s", get_payment_fee_response.to_json())
         self.assertEqual('OK', get_payment_fee_response.code)
         self.assertIsNotNone(get_payment_fee_response.data)
@@ -104,5 +104,5 @@ class TestPaymentAPI(TestBaseClient):
             payment_method_id='5c0bce95-7d10-47f3-8e11-250ab900da07',
             unique_id=uuid.uuid4()
         )
-        create_payment_response = self.PaymentAPI.create_payment(self.access_token, create_payment_request)
+        create_payment_response = self.PaymentAPI.create_payment(create_payment_request)
         return create_payment_response.data.id

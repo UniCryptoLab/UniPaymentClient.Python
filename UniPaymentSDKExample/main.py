@@ -1,7 +1,7 @@
 import json
 
 from flask import Flask, render_template, request, flash, redirect, jsonify
-from unipayment import Configuration, BillingAPI, CommonAPI, OauthTokenAPI, ApiException
+from unipayment import Configuration, BillingAPI, CommonAPI, ApiException
 from unipayment.models import CreateInvoiceRequest, QueryInvoicesRequest
 
 app = Flask(__name__)
@@ -68,12 +68,9 @@ def post_create_invoice():
     config.app_id = app_id
     config.debug = True
 
-    token_response = OauthTokenAPI(config).get_access_token()
-    access_token = token_response.access_token
-
     try:
         billing_api = BillingAPI(configuration=config)
-        create_invoice_response = billing_api.create_invoice(access_token, create_invoice_request)
+        create_invoice_response = billing_api.create_invoice(create_invoice_request)
         if create_invoice_response.code != 'OK':
             flash(create_invoice_response.msg)
         else:
@@ -114,15 +111,13 @@ def post_query_invoice():
     config.client_secret = client_secret
     config.debug = True
 
-    token_response = OauthTokenAPI(config).get_access_token()
-    access_token = token_response.access_token
     billing_api = BillingAPI(configuration=config)
 
     query_invoices_request = QueryInvoicesRequest(invoice_id=invoice_id, order_id=order_id, status=status, start=start,
                                                   end=end, page_size=page_size, page_no=page_no, is_asc=is_asc)
 
     try:
-        query_invoice_response = billing_api.query_invoices(access_token, query_invoices_request)
+        query_invoice_response = billing_api.query_invoices(query_invoices_request)
         return json.loads(query_invoice_response.to_json())
     except ApiException as e:
         error_response = json.loads(e.body)

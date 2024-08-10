@@ -40,7 +40,7 @@ pip install unipayment
 You can load the configurations using the following:
 
 ```python
-from unipayment import Configuration, BillingAPI, BeneficiaryAPI, CommonAPI, OauthTokenAPI, ExchangeAPI, PaymentAPI, WalletAPI
+from unipayment import Configuration, BillingAPI, BeneficiaryAPI, CommonAPI, ExchangeAPI, PaymentAPI, WalletAPI
 
 self.configuration = Configuration()
 self.configuration.client_id = '071a5fad-9f7e-4785-9fe1-5a5e8d45c518'
@@ -71,11 +71,6 @@ endpoint. This request must include your client_id, client_secret, and the grant
 
 > How to obtain an access token: https://unipayment.readme.io/reference/access-token
 
-```python
-token_response = self.OauthTokenAPI.get_access_token()
-access_token = token_response.access_token
-```
-
 Note: If access token is expired, an exception will be thrown by the SDK.
 
 ## Create an invoice
@@ -95,7 +90,7 @@ create_invoice_request = CreateInvoiceRequest(app_id=self.configuration.app_id, 
                                               price_currency='USD', order_id=order_id, lang='en',
                                               ext_args='"Merchant Pass Through Data')
 
-create_invoice_response = self.BillingAPI.create_invoice(self.access_token, create_invoice_request)
+create_invoice_response = self.BillingAPI.create_invoice(create_invoice_request)
 logger.debug("response body: %s", create_invoice_response)
 
 ```
@@ -149,7 +144,7 @@ complete.
 def check_notify():
     notify = request.get_json()
     try:
-        check_ipn_response = self.CommonAPI.check_ipn(self.access_token, notify)
+        check_ipn_response = self.CommonAPI.check_ipn(notify)
         if check_ipn_response.code == 'OK':
             # ipn is valid, we can handel status
             if notify['status'] == 'Confirmed':

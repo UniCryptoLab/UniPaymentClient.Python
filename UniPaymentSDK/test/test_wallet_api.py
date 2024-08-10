@@ -22,7 +22,7 @@ class TestWalletAPI(TestBaseClient):
         """
             Test case get_balances
         """
-        get_wallet_balances_response = self.WalletAPI.get_balances(self.access_token)
+        get_wallet_balances_response = self.WalletAPI.get_balances()
         logger.debug("response body: %s", get_wallet_balances_response.to_json())
         self.assertEqual('OK', get_wallet_balances_response.code)
 
@@ -30,7 +30,7 @@ class TestWalletAPI(TestBaseClient):
         """
             Test case get_balances
         """
-        get_wallet_accounts_response = self.WalletAPI.get_accounts(self.access_token)
+        get_wallet_accounts_response = self.WalletAPI.get_accounts()
         logger.debug("response body: %s", get_wallet_accounts_response.to_json())
         self.assertEqual('OK', get_wallet_accounts_response.code)
 
@@ -38,10 +38,9 @@ class TestWalletAPI(TestBaseClient):
         """
             Test case get_deposit_bank_account
         """
-        get_wallet_accounts_response = self.WalletAPI.get_accounts(self.access_token)
+        get_wallet_accounts_response = self.WalletAPI.get_accounts()
         fiat_account_id = get_account_id(get_wallet_accounts_response, 'USD')
-        get_deposit_bank_account_response = self.WalletAPI.get_deposit_bank_account(self.access_token,
-                                                                                    fiat_account_id)
+        get_deposit_bank_account_response = self.WalletAPI.get_deposit_bank_account(fiat_account_id)
         logger.debug("response body: %s", get_deposit_bank_account_response.to_json())
         self.assertEqual('OK', get_deposit_bank_account_response.code)
         self.assertIsNotNone(get_deposit_bank_account_response.data)
@@ -50,10 +49,9 @@ class TestWalletAPI(TestBaseClient):
         """
             Test case get_deposit_address
         """
-        get_wallet_accounts_response = self.WalletAPI.get_accounts(self.access_token)
+        get_wallet_accounts_response = self.WalletAPI.get_accounts()
         crypto_account_id = get_account_id(get_wallet_accounts_response, 'BNB')
-        get_deposit_address_response = self.WalletAPI.get_deposit_address(self.access_token,
-                                                                          crypto_account_id)
+        get_deposit_address_response = self.WalletAPI.get_deposit_address(crypto_account_id)
         logger.debug("response body: %s", get_deposit_address_response.to_json())
         self.assertEqual('OK', get_deposit_address_response.code)
         self.assertIsNotNone(get_deposit_address_response.data)
@@ -62,9 +60,8 @@ class TestWalletAPI(TestBaseClient):
         """
             Test case query_transactions
         """
-        get_wallet_accounts_response = self.WalletAPI.get_accounts(self.access_token)
+        get_wallet_accounts_response = self.WalletAPI.get_accounts()
         fiat_account_id = get_account_id(get_wallet_accounts_response, 'USD')
-        query_wallet_account_transactions_response = self.WalletAPI.query_transactions(self.access_token,
-                                                                                       fiat_account_id)
+        query_wallet_account_transactions_response = self.WalletAPI.query_transactions(fiat_account_id)
         logger.debug("response body: %s", query_wallet_account_transactions_response.to_json())
         self.assertEqual('OK', query_wallet_account_transactions_response.code)

@@ -13,8 +13,7 @@ from .common_api import CommonAPI
 from .exchange_api import ExchangeAPI
 from .payment_api import PaymentAPI
 from .wallet_api import WalletAPI
-from .oauth_token_api import OauthTokenAPI
 
 __all__ = ['ApiClient', 'ApiException', 'BaseClient', 'Configuration', 'RESTResponse', 'UnipaymentSdkException',
-           'BeneficiaryAPI', 'BillingAPI', 'CommonAPI', 'ExchangeAPI', 'OauthTokenAPI', 'PaymentAPI', 'WalletAPI',
+           'BeneficiaryAPI', 'BillingAPI', 'CommonAPI', 'ExchangeAPI', 'PaymentAPI', 'WalletAPI',
            'models']
