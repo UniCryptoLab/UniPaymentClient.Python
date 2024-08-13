@@ -6,9 +6,9 @@ A Python client for the [UniPayment Client API](https://unipayment.readme.io/ref
 
 This SDK provides a convenient abstraction of UniPayment's Gateway API and allows developers to focus on payment flow/e-commerce integration rather than on the specific details of client-server interaction using the raw API.
 
-```bash
-Due to API updates, our SDK has been upgraded to version 2.0; please obtain the latest SDK code from the v2.x.x branch.
-```
+
+### Due to API updates, our SDK has been upgraded to version 2.0; please obtain the latest SDK code from the v2.x.x branch.
+
 
 ## Getting Started
 
