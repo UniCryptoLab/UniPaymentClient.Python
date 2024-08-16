@@ -3,7 +3,7 @@ from __future__ import absolute_import
 import logging
 import unittest
 
-from unipayment import BillingAPI, BeneficiaryAPI, CommonAPI, ExchangeAPI, PaymentAPI, WalletAPI
+from unipayment import BillingAPI, BeneficiaryAPI, CommonAPI, ExchangeAPI, PaymentAPI, WalletAPI, WebhookAPI
 from unipayment import Configuration
 
 logger = logging.getLogger(__name__)
@@ -23,6 +23,7 @@ class TestBaseClient(unittest.TestCase):
         self.WalletAPI = WalletAPI(self.configuration)
         self.PaymentAPI = PaymentAPI(self.configuration)
         self.BillingAPI = BillingAPI(self.configuration)
+        self.WebhookAPI = WebhookAPI(self.configuration)
 
         if self.configuration.debug:
             logger.setLevel(logging.DEBUG)

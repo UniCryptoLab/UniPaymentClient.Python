@@ -54,6 +54,8 @@ from .wallet_balance import WalletBalance
 from .wallet_account import WalletAccount, AccountType
 from .get_wallet_balances_response import GetWalletBalancesResponse
 from .get_wallet_accounts_response import GetWalletAccountsResponse
+from .update_notify_url_request import UpdateNotifyURLRequest
+from .update_secret_key_request import UpdateSecretKeyRequest
 
 __all__ = ['AcceptQuoteResponse', 'AccountType', 'BankAccount', 'DepositBankAccount', 'BankInfo',
            'BankPaymentMethodDetail', 'Beneficiary', 'BeneficiaryType', 'Relationship', 'BeneficiaryResponse',
@@ -70,4 +72,4 @@ __all__ = ['AcceptQuoteResponse', 'AccountType', 'BankAccount', 'DepositBankAcco
            'QueryPaymentsResponse', 'QueryPaymentMethodsResponse', 'QueryResult',
            'QueryWalletAccountTransactionsRequest', 'QueryWalletAccountTransactionsResponse', 'Quote',
            'QuoteRequest', 'QuoteResponse', 'TokenResponse', 'Transaction', 'TransactionType', 'TransferMode',
-           'WalletAccount', 'WalletBalance']
+           'WalletAccount', 'WalletBalance', 'UpdateNotifyURLRequest', 'UpdateSecretKeyRequest', ]

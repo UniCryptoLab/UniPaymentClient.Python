@@ -13,7 +13,9 @@ from .common_api import CommonAPI
 from .exchange_api import ExchangeAPI
 from .payment_api import PaymentAPI
 from .wallet_api import WalletAPI
+from .webhook_api import WebhookAPI
+from .webhook_signature_util import WebhookSignatureUtil
 
 __all__ = ['ApiClient', 'ApiException', 'BaseClient', 'Configuration', 'RESTResponse', 'UnipaymentSdkException',
-           'BeneficiaryAPI', 'BillingAPI', 'CommonAPI', 'ExchangeAPI', 'PaymentAPI', 'WalletAPI',
-           'models']
+           'BeneficiaryAPI', 'BillingAPI', 'CommonAPI', 'ExchangeAPI', 'PaymentAPI', 'WalletAPI', 'WebhookAPI',
+           'WebhookSignatureUtil', 'models']
