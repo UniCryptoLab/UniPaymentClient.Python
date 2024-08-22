@@ -20,9 +20,11 @@ class TestBillingAPI(TestBaseClient):
             Test case create_invoice
         """
         order_id = uuid.uuid4()
-        create_invoice_request = CreateInvoiceRequest(app_id=self.configuration.app_id, price_amount=2.0,
+        create_invoice_request = CreateInvoiceRequest(app_id=self.configuration.app_id, price_amount=20.0,
                                                       price_currency='USD', order_id=order_id, lang='en',
-                                                      ext_args='"Merchant Pass Through Data')
+                                                      ext_args='"Merchant Pass Through Data', host_to_host_mode=True,
+                                                      payment_method_type='CRYPTO', pay_currency='BNB',
+                                                      network='NETWORK_BSC')
         create_invoice_response = self.BillingAPI.create_invoice(create_invoice_request)
         logger.debug("response body: %s", create_invoice_response)
         self.assertEqual('OK', create_invoice_response.code)

@@ -6,6 +6,8 @@ from typing import Optional
 from dataclasses_json import dataclass_json, config
 from marshmallow import fields
 
+from unipayment.models.host_to_host_data import HostToHostData
+
 
 class PaymentMethodType(Enum):
     CRYPTO = "CRYPTO"
@@ -43,6 +45,7 @@ class Invoice:
     app_id: str
     invoice_id: str
     payment_method_type: PaymentMethodType
+    host_to_host_mode: bool
     order_id: str
     price_amount: float
     price_currency: str
@@ -71,3 +74,4 @@ class Invoice:
     network: Optional[str] = None
     address: Optional[str] = None
     pay_currency: Optional[str] = None
+    host_to_host_data: Optional[HostToHostData] = None

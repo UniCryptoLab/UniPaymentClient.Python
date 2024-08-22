@@ -14,10 +14,11 @@ class CreateInvoiceRequest:
     price_currency: str
     order_id: str
     pay_currency: Optional[str] = None
+    network: Optional[str] = None
     lang: Optional[str] = None
     ext_args: Optional[str] = None
     payment_method_type: Optional[str] = None
-    pay_network: Optional[str] = None
+    host_to_host_mode: bool = False
     notify_url: Optional[str] = None
     redirect_url: Optional[str] = None
     title: Optional[str] = None
