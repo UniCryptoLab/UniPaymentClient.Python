@@ -3,7 +3,7 @@ from typing import Optional
 
 from dataclasses_json import dataclass_json
 
-from unipayment.models import ConfirmSpeed
+from unipayment.models import ConfirmSpeed, BuyerInfo
 
 
 @dataclass_json
@@ -24,3 +24,4 @@ class CreateInvoiceRequest:
     title: Optional[str] = None
     description: Optional[str] = None
     confirm_speed: Optional[ConfirmSpeed] = None
+    buyer_info: Optional[BuyerInfo] = None

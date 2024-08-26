@@ -14,6 +14,7 @@ from .payment_method import PaymentMethod, TransferMode, PaymentMethodDetail, Ba
 from .invoice import Invoice, PaymentMethodType, InvoiceStatus, InvoiceErrorStatus, ConfirmSpeed
 from .transaction import Transaction
 from .invoice_detail import InvoiceDetail
+from .buyer_info import BuyerInfo
 from .create_invoice_request import CreateInvoiceRequest
 from .create_invoice_response import CreateInvoiceResponse
 from .create_payment_request import CreatePaymentRequest, PaymentReason
@@ -59,8 +60,8 @@ from .update_secret_key_request import UpdateSecretKeyRequest
 
 __all__ = ['AcceptQuoteResponse', 'AccountType', 'BankAccount', 'DepositBankAccount', 'BankInfo',
            'BankPaymentMethodDetail', 'Beneficiary', 'BeneficiaryType', 'Relationship', 'BeneficiaryResponse',
-           'CheckIpnResponse', 'CreateInvoiceRequest', 'CreateInvoiceResponse', 'CreatePaymentRequest', 'ConfirmSpeed',
-           'CryptoPaymentMethodDetail', 'Currency', 'DepositAddress', 'ExchangeOrder', 'ExchangeRate',
+           'CheckIpnResponse', 'BuyerInfo', 'CreateInvoiceRequest', 'CreateInvoiceResponse', 'CreatePaymentRequest',
+           'ConfirmSpeed', 'CryptoPaymentMethodDetail', 'Currency', 'DepositAddress', 'ExchangeOrder', 'ExchangeRate',
            'GetCurrenciesResponse', 'GetDepositAddressResponse', 'GetDepositBankAccountResponse',
            'GetExchangeRateResponse', 'GetExchangeRatesResponse', 'GetInvoiceByIdResponse', 'GetPaymentFeeResponse',
            'GetWalletBalancesResponse', 'GetWalletAccountsResponse', 'InternalPaymentMethodDetail', 'Invoice',
