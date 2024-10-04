@@ -10,7 +10,7 @@ flow/e-commerce integration rather than on the specific details of client-server
 
 ## Getting Started
 
-[Integrate Tutorial](https://help.unipayment.io/en/articles/7851188-integrate-with-payment-gateway)
+[Integration Tutorial](https://bit.ly/up-help-integration)
 
 Before using the UniPayment API, sign up for your [API key](https://console.unipayment.io/).
 
@@ -47,7 +47,9 @@ self.configuration = Configuration()
 self.configuration.client_id = '071a5fad-9f7e-4785-9fe1-5a5e8d45c518'
 self.configuration.client_secret = 'CzWUHMvWy7Dw7NAc8ZnKaDkqnXzSMV18d'
 self.configuration.app_id = "a22a62d1-3b64-4cb5-9336-9c45afd91e6e"
+self.configuration.is_sandbox = True
 self.configuration.debug = True
+
 self.CommonAPI = CommonAPI(self.configuration)
 self.BeneficiaryAPI = BeneficiaryAPI(self.configuration)
 self.ExchangeAPI = ExchangeAPI(self.configuration)
@@ -60,19 +62,6 @@ if self.configuration.debug:
 
 ```
 
-## Authentication
-
-> Reference：https://unipayment.readme.io/reference/authentication
-
-### Obtaining An Access Token
-
-To authenticate your application, you need to obtain an access token by making a request to our OAuth 2.0 token
-endpoint. This request must include your client_id, client_secret, and the grant_type.
-
-> How to obtain an access token: https://unipayment.readme.io/reference/access-token
-
-
-Note: If access token is expired, an exception will be thrown by the SDK.
 
 ## Create an invoice
 
@@ -127,74 +116,8 @@ logger.debug("response body: %s", create_invoice_response)
 
 ```
 
-## Handle Invoice IPN
-
-> Reference：https://unipayment.readme.io/reference/ipn-check
->
-> IPN: https://unipayment.readme.io/reference/ipn-payment-notification
->
-> Invoice Status: https://unipayment.readme.io/reference/invoice-status
-
-
-IPNs (Instant Payment Notifications) are sent to the notify_url when order status is changed to paid, confirmed and
-complete.
-
-```python
-
-@app.route("/handle-notify", methods=['POST'])
-def check_notify():
-    notify = request.get_json()
-    try:
-        check_ipn_response = self.CommonAPI.check_ipn(notify)
-        if check_ipn_response.code == 'OK':
-            # ipn is valid, we can handel status
-            if notify['status'] == 'Confirmed':
-                # payment is confirmed, we can process order here
-                print('invoice is confirmed')
-        else:
-            # ipn is not valid
-            pass
-    except ApiException as e:
-        print(e)
-
-```
-
-IPN notify
-
-``` json
-{
-	"ipn_type": "invoice",
-	"event": "invoice_expired",
-	"app_id": "cee1b9e2-d90c-4b63-9824-d621edb38012",
-	"invoice_id": "3Q7fyLnB2YNhUDW1fFNyEz",
-	"order_id": "20",
-	"price_amount": 6.0,
-	"price_currency": "SGD",
-	"network": null,
-	"address": null,
-	"pay_currency": null,
-	"pay_amount": 0.0,
-	"exchange_rate": 0.0,
-	"paid_amount": 0.0,
-	"confirmed_amount": 0.0,
-	"refunded_price_amount": 0.0,
-	"create_time": "2022-09-12T03:36:03",
-	"expiration_time": "2022-09-12T03:41:03",
-	"status": "Expired",
-	"error_status": "None",
-	"ext_args": null,
-	"transactions": null,
-	"notify_id": "8ccd2b61-226b-48e5-99b8-acb1f350313e",
-	"notify_time": "2022-09-12T03:56:10.5852752Z"
-}
-```
-
-## Handle Withdrawal IPN
-
-> Reference：https://unipayment.readme.io/reference/ipn-check
-
-> IPN: https://unipayment.readme.io/reference/ipn-withdrawal-notification
-
+## Webhook Notification
+[Webhook Tutorial](https://bit.ly/up-help-webhook)
 
 ## Webhook Signature Verification
 
