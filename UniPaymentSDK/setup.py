@@ -10,7 +10,8 @@ VERSION = "2.0.0"
 # http://pypi.python.org/pypi/setuptools
 
 
-REQUIRES = ["urllib3 >= 2.2.2", "six >= 1.16.0", "certifi >= 2024.7.4", "python-dateutil >= 2.9.0"]
+REQUIRES = ["urllib3 >= 2.2.2", "six >= 1.16.0", "certifi >= 2024.7.4", "python-dateutil >= 2.9.0",
+            "setuptools >= 71.1.0", "dataclasses-json ~= 0.6.7"]
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
