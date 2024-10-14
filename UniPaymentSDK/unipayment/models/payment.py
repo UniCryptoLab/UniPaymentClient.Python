@@ -20,8 +20,8 @@ class PaymentStatus(Enum):
     CONFIRMED = "CONFIRMED"
     REJECTED = "REJECTED"
     APPROVED = "APPROVED"
-    SUCCESS = "SUCCESS"
-    FAIL = "FAIL"
+    COMPLETED = "COMPLETED"
+    FAILED = "FAILED"
 
 
 @dataclass_json
