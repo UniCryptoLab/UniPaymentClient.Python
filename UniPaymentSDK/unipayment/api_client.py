@@ -6,7 +6,7 @@ from multiprocessing.pool import ThreadPool
 from .configuration import Configuration
 from .rest import RESTClientObject
 
-SDK_VERSION = '2.0.0'
+SDK_VERSION = '2.0.2'
 
 
 class ApiClient(object):
