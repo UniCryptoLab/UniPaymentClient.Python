@@ -5,7 +5,7 @@ from typing import List, Optional
 from dataclasses_json import dataclass_json, config
 from marshmallow import fields
 
-from unipayment.models import PaymentMethodType, ConfirmSpeed, InvoiceStatus, Transaction
+from unipayment.models import PaymentMethodType, ConfirmSpeed, InvoiceStatus, Transaction, InvoiceRefund
 
 
 @dataclass_json
@@ -39,6 +39,7 @@ class InvoiceDetail:
     status: InvoiceStatus
     invoice_url: str
     transactions: List[Transaction]
+    refunds: List[InvoiceRefund]
     network: Optional[str] = None
     address: Optional[str] = None
     pay_currency: Optional[str] = None
